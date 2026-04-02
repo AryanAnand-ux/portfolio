@@ -1,0 +1,120 @@
+.hero-section {
+  padding: 12rem 0 8rem;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.hero-content {
+  text-align: left;
+}
+
+.floating-tags {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: flex;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.tag-blue { background-color: var(--accent-blue); }
+.tag-green { background-color: var(--accent-green); }
+.tag-orange { background-color: var(--accent-orange); }
+
+.hero-title {
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 2.5rem;
+}
+
+.highlight-text {
+  display: inline-block;
+  background-color: var(--accent-pink);
+  padding: 0 0.5rem;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--border-color);
+  transform: rotate(-1deg);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background-color: var(--accent-yellow);
+  font-size: 1.125rem;
+  padding: 1rem 2rem;
+}
+
+.btn-secondary {
+  background-color: var(--accent-purple);
+  font-size: 1.125rem;
+  padding: 1rem;
+}
+
+.hero-image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.hero-avatar {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 20px;
+  background-color: var(--accent-yellow);
+  transform: rotate(2deg);
+  transition: all 0.3s ease;
+}
+
+.hero-avatar:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+@media (max-width: 900px) {
+  .hero-section {
+    padding: 10rem 0 5rem;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+  .hero-content {
+    text-align: center;
+  }
+  .floating-tags,
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-image-wrap {
+    order: -1;
+    padding: 1rem;
+  }
+  .hero-avatar {
+    max-width: 240px;
+  }
+  .btn-primary,
+  .btn-secondary {
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+}

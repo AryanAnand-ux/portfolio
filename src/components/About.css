@@ -1,0 +1,79 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+}
+
+.about-content, .about-sidebar {
+  background-color: #fff;
+  padding: 3rem;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.about-content:hover, .about-sidebar:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0px var(--border-color);
+}
+
+.about-content p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.btn-resume {
+  font-weight: bold;
+}
+
+.about-sidebar h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.edu-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.edu-block strong {
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.edu-block span {
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.edu-badge {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.sidebar-divider {
+  border: none;
+  border-top: 2px solid var(--text-color);
+  margin: 2.5rem 0;
+}
+
+.focus-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tag-rounded {
+  border-radius: 20px;
+}
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-content, .about-sidebar {
+    padding: 2rem;
+  }
+}

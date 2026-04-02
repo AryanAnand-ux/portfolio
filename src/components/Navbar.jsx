@@ -1,0 +1,95 @@
+import { useState, useEffect, useRef } from 'react';
+import { Menu, X } from 'lucide-react';
+import './Navbar.css';
+
+const Navbar = () => {
+  const [activeSection, setActiveSection] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -60% 0px' }
+    );
+    document.querySelectorAll('section').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentY = window.scrollY;
+          setScrolled(currentY > 60);
+
+          // Hide on scroll down, show on scroll up (only after passing 60px)
+          if (currentY > 60) {
+            setHidden(currentY > lastScrollY.current);
+          } else {
+            setHidden(false);
+          }
+
+          lastScrollY.current = currentY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu on outside click
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const handleOutsideClick = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [isMobileMenuOpen]);
+
+  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
+  const navClass = [
+    'navbar',
+    scrolled ? 'scrolled' : '',
+    hidden && !isMobileMenuOpen ? 'navbar-hidden' : '',
+  ].filter(Boolean).join(' ');
+
+  return (
+    <nav ref={navRef} className={navClass}>
+      <div className="container nav-content">
+        <a href="#" className="nav-logo" onClick={() => setIsMobileMenuOpen(false)}>
+          Aryan<span>.</span>
+        </a>
+        <div className={`nav-links ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
+          <a href="#about" onClick={toggleMenu} className={`nav-link brut-box ${activeSection === 'about' ? 'active' : ''}`}>About</a>
+          <a href="#projects" onClick={toggleMenu} className={`nav-link brut-box ${activeSection === 'projects' ? 'active' : ''}`}>Projects</a>
+          <a href="#skills" onClick={toggleMenu} className={`nav-link brut-box ${activeSection === 'skills' ? 'active' : ''}`}>Skills</a>
+          <a href="#contact" onClick={toggleMenu} className={`brut-btn nav-cta ${activeSection === 'contact' ? 'active' : ''}`}>Get in Touch</a>
+        </div>
+        <button className="mobile-menu-btn brut-box" onClick={toggleMenu} aria-label="Toggle navigation menu">
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

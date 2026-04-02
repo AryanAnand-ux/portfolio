@@ -1,0 +1,70 @@
+.center-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-card {
+  background-color: var(--accent-yellow);
+  padding: 4rem;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.contact-heading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.contact-text {
+  font-size: 1.15rem;
+  margin-bottom: 2.5rem;
+  color: #333;
+}
+
+.btn-large {
+  font-size: 1.25rem;
+  padding: 1.25rem 2.5rem;
+  background-color: var(--accent-blue);
+  margin-bottom: 3rem;
+  max-width: 100%;
+  word-break: break-word; /* Allows long email to wrap inside button */
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
+  color: var(--text-color);
+  transition: all 0.2s;
+}
+
+.social-icon:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--border-color);
+  background-color: var(--accent-pink);
+}
+
+@media (max-width: 768px) {
+  .contact-card {
+    padding: 2rem 1rem;
+  }
+  
+  .btn-large {
+    font-size: 1rem;
+    padding: 1rem;
+    word-break: break-all;
+  }
+}

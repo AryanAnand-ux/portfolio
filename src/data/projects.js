@@ -1,0 +1,38 @@
+export const projectsData = [
+  {
+    id: 'netra',
+    title: 'Netra',
+    description: 'AI-driven booth management system using Knowledge Graphs. Won 1st place at Elite Hack 1.0 for an innovative AI solution among 100+ teams.',
+    tech: ['AI', 'Knowledge Graphs', 'React'],
+    link: null,
+    github: 'https://github.com/AryanAnand-ux',
+    layoutClass: 'bento-wide',
+  },
+  {
+    id: 'skillsync-ai',
+    title: 'SkillSync AI',
+    description: 'GenAI platform bridging resume-to-JD gaps with intelligent skill matching and personalized upskilling pathways.',
+    tech: ['GenAI', 'Next.js', 'Node.js'],
+    link: null,
+    github: 'https://github.com/AryanAnand-ux',
+    layoutClass: 'bento-narrow',
+  },
+  {
+    id: 'graphql-vs-rest',
+    title: 'GraphQL vs. REST',
+    description: 'Technical research paper benchmarking API performance, latency, and developer experience across GraphQL and REST paradigms.',
+    tech: ['Research', 'GraphQL', 'REST'],
+    link: null,
+    github: 'https://github.com/AryanAnand-ux',
+    layoutClass: 'bento-narrow',
+  },
+  {
+    id: 'krishi-mitra',
+    title: 'Krishi Mitra',
+    description: 'Weather-based crop recommendation engine helping farmers optimize yield through ML-powered predictions and soil analysis.',
+    tech: ['ML', 'Python', 'MERN'],
+    link: null,
+    github: 'https://github.com/AryanAnand-ux',
+    layoutClass: 'bento-wide',
+  },
+];

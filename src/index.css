@@ -1,0 +1,177 @@
+/* Google Fonts are loaded via <link> tags in index.html for non-blocking delivery */
+
+:root {
+  --bg-color: #fffaec;
+  --text-color: #111;
+  --border-color: #111;
+  
+  /* Pastel Accent Colors */
+  --accent-pink: #fec0c1;
+  --accent-blue: #a3def0;
+  --accent-green: #bcebc5;
+  --accent-orange: #fdccaa;
+  --accent-purple: #d1c0ff;
+  --accent-yellow: #fde88f;
+
+  /* Sizing/Spacing Tokens */
+  --border-width: 3px;
+  --border-radius: 12px;
+  --shadow-sm: 6px 6px 0px var(--border-color);
+  --shadow-md: 10px 10px 0px var(--border-color);
+  --shadow-hover: 2px 2px 0px var(--border-color);
+  --shadow-pressed: 0px 0px 0px transparent;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  background-image: radial-gradient(#d3d1bf 1px, transparent 1px);
+  background-size: 20px 20px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Scroll reveal utility */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Base UTILITY classes for neo-brutalism */
+.brut-box {
+  background-color: #fff;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s ease-in-out;
+}
+
+.brut-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background-color: #fff;
+  color: var(--text-color);
+}
+
+.brut-btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow: var(--shadow-hover);
+}
+
+.brut-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: var(--shadow-pressed);
+}
+
+/* Layout utilities */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 6rem 0;
+}
+
+.section-title {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--accent-purple);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 50px;
+  box-shadow: var(--shadow-sm);
+  transform: rotate(-2deg);
+}
+
+.section-header-wrap {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* Accessibility: respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Fallback: ensure content is visible if JS hasn't loaded */
+noscript ~ #root .reveal {
+  opacity: 1;
+  transform: none;
+}
+/* ---- Shared Component Utilities ---- */
+/* bento-pill: tech tag used in ProjectCard and Skills */
+.bento-pill {
+  padding: 0.3rem 0.9rem;
+  background-color: #fff;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  border: 2px solid var(--border-color);
+  font-weight: 700;
+  box-shadow: 2px 2px 0px var(--border-color);
+  display: inline-block;
+}
+
+/* brut-box-small: compact neo-brutalist chip used in About and elsewhere */
+.brut-box-small {
+  background-color: #fff;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-block;
+  box-shadow: 2px 2px 0px var(--border-color);
+}
