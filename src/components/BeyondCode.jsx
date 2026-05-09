@@ -17,7 +17,7 @@ const BeyondCode = () => (
               <div className="activity-top">
                 <div>
                   <div className="activity-title-row">
-                    <span className="activity-icon">❤</span>
+                    <span className="activity-icon" aria-hidden="true">ISF</span>
                     <h3>Member @ ISF</h3>
                   </div>
                   <span className="activity-date">2024 - Present</span>
@@ -33,7 +33,7 @@ const BeyondCode = () => (
           </div>
 
           <div className="beyond-right">
-            <div className="coding-pill">CODING <span aria-hidden>🏆</span></div>
+            <div className="coding-pill">CODING</div>
             <article className="coding-card brut-box">
               <div className="coding-item">
                 <Trophy size={20} />

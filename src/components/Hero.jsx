@@ -42,7 +42,7 @@ const Hero = () => (
         {/* Right: big intro card + terminal mock */}
         <div className="hero-right">
           <div className="hero-cta-card reveal">
-            <h1 className="hero-title">Hi people! <span aria-hidden>👋</span></h1>
+            <h1 className="hero-title">Hi people!</h1>
             <p className="hero-lead">
               I am a <span className="hero-highlight">2nd-year student at JUET, Guna</span>, pursuing Bachelor of Technology in Computer Science and Engineering.
             </p>
@@ -51,7 +51,7 @@ const Hero = () => (
             </p>
 
             <div className="hero-cta-actions">
-              <a href="#contact" className="brut-btn btn-primary">🚀 Open to Software and Research Internships</a>
+              <a href="#contact" className="brut-btn btn-primary">Open to Software and Research Internships</a>
             </div>
           </div>
 

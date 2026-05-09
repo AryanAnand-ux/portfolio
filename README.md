@@ -1,75 +1,131 @@
-# Aryan Anand | Software Engineer & AI Architect
+# Aryan Anand Portfolio
 
-This is a static portfolio built with Vite and React. It showcases projects, skills, education, contact links, and a small interactive terminal mock in the hero section.
+Static portfolio website for Aryan Anand, a B.Tech CSE student focused on full-stack development, AI, research, and scalable web products.
+
+## Overview
+
+The site is a single-page React application that presents:
+
+- Hero profile card with resume and contact actions
+- Interactive terminal mock with portfolio commands and mini games
+- Skills grouped by engineering area
+- Project cards sourced from structured data
+- Extra-curricular and achievement highlights
+- Education timeline with an interactive doodle canvas
+- Contact and social links
+
+There is no backend, database, authentication layer, or runtime API integration in the current project. The app builds to static files in `dist/` and can be deployed on any static hosting platform.
 
 ## Tech Stack
 
 - React 19
 - Vite 8
-- Lucide icons
-- Plain CSS files, with shared tokens in `src/index.css`
+- Lucide React icons
+- Plain CSS modules by component
+- ESLint 9 flat config
+
+## Project Structure
+
+```text
+.
+├── index.html
+├── package.json
+├── vite.config.js
+├── eslint.config.js
+├── public/
+│   ├── avatar.png
+│   ├── favicon.svg
+│   ├── resume.pdf
+│   └── robots.txt
+├── scripts/
+│   └── create-demo-pdf.mjs
+└── src/
+    ├── App.jsx
+    ├── main.jsx
+    ├── index.css
+    ├── data/
+    │   ├── projects.js
+    │   └── skills.js
+    └── components/
+```
 
 ## Local Development
 
-To run the application locally:
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/AryanAnand-ux/portfolio.git
-   cd portfolio
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-   The app runs at `http://localhost:5173`.
-
-## Build And Preview
-
-Create a production build and preview it locally:
+Install dependencies:
 
 ```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Run linting:
+
+```bash
+npm run lint
+```
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+On Windows PowerShell, if script execution blocks `npm`, use `npm.cmd`:
+
+```bash
+npm.cmd run build
+```
+
+## Content Updates
+
+- Edit projects in `src/data/projects.js`.
+- Edit skill groups in `src/data/skills.js`.
+- Replace `public/resume.pdf` with the current resume.
+- Replace `public/avatar.png` to update profile and preview imagery.
+- Update SEO metadata in `index.html`.
+
+## Deployment
+
+Recommended production flow:
+
+```bash
+npm install
+npm run lint
 npm run build
 npm run preview
 ```
 
-## Project Structure
+Deploy the generated `dist/` directory to Vercel, Netlify, GitHub Pages, Cloudflare Pages, or any CDN-backed static host.
 
-- `src/App.jsx` wires the one-page layout together.
-- `src/components/` contains the sections, shared UI, and the terminal widget.
-- `src/data/` stores the project and skills content rendered in the UI.
-- `public/` contains the avatar, favicon, resume PDF, and robots file.
-- `scripts/create-demo-pdf.mjs` generates the placeholder resume PDF if you need to regenerate it.
+## Production Checklist
 
-## Deployment
+- Confirm `public/resume.pdf` is the real resume, not a placeholder.
+- Confirm all external project, GitHub, and LinkedIn links are current.
+- Run `npm audit --audit-level=moderate` before release.
+- Run `npm run lint` and `npm run build` in CI.
+- Configure canonical URL and absolute social preview image URL once the production domain is final.
 
-This project is ready for static hosting on Vercel, Netlify, GitHub Pages, or any CDN-backed static host.
+## Future Improvements
 
-Recommended production flow:
+- Add automated visual checks with Playwright.
+- Add a small test suite for terminal command behavior.
+- Migrate to TypeScript when the content model grows.
+- Add a CI workflow for lint, audit, and build.
+- Consider statically rendered GitHub repository stats if live project data becomes important.
 
-1. Run `npm run build`.
-2. Verify the `dist/` output locally with `npm run preview`.
-3. Deploy the contents of `dist/` to your host.
-4. Ensure `public/resume.pdf` and `public/avatar.png` are included in the deployment.
+## Contact
 
-
-##  Future Improvements
-- [ ] Incorporate dynamic GitHub API data fetching to statically render up-to-date repository stats.
-- [ ] Migrate the codebase to TypeScript for robust typing.
-- [ ] Add an MDX-powered blog section.
-
-##  Connect 
-
-* **LinkedIn:** [Aryan Anand](https://www.linkedin.com/in/aryananand-ux)
-* **GitHub:** [@AryanAnand-ux](https://github.com/AryanAnand-ux)
-* **Email:** [aryan.anand1806@gmail.com](mailto:aryan.anand1806@gmail.com)
-
----
-
-*Built with passion, robust engineering, and 🍕 by **Aryan Anand**.*
+- LinkedIn: https://www.linkedin.com/in/aryananand-ux
+- GitHub: https://github.com/AryanAnand-ux
+- Email: aryan.anand1806@gmail.com

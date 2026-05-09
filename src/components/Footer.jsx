@@ -12,7 +12,7 @@ const Footer = () => (
       </a>
     </div>
     <p className="footer-copy">
-      © {new Date().getFullYear()} Aryan Anand. Built with 💻 and 🍕.
+      Copyright {new Date().getFullYear()} Aryan Anand. Built with React and Vite.
     </p>
   </footer>
 );

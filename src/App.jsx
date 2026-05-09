@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
@@ -12,14 +12,6 @@ import Loading from './components/Loading';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1800);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,7 +35,7 @@ function App() {
 
   return (
     <>
-      <Loading isComplete={!isLoading} />
+      <Loading isComplete={!isLoading} onComplete={() => setIsLoading(false)} />
       <style>{`
         html {
           scroll-padding-top: 80px;

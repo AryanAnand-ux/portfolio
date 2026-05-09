@@ -68,5 +68,5 @@ const xref =
   '%%EOF\n';
 
 fs.writeFileSync(outPath, body + xref, 'latin1');
-console.log('✅ Demo PDF created at', outPath);
+console.log('Demo PDF created at', outPath);
 console.log('   Replace public/resume.pdf with your real resume when ready.');

@@ -30,6 +30,3 @@ export const arsenalData = [
     tags: ['Git', 'GitHub', 'GCP', 'AWS', 'Postman'],
   },
 ];
-
-// milestones removed from UI for now — data kept here if needed later
-export const milestonesData = [];

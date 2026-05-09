@@ -1,7 +1,7 @@
 import './MarqueeStrip.css';
 
 const MarqueeStrip = () => {
-  const text = 'REACT • NODE • MONGODB • PYTHON ⚡ BUILDING REAL-WORLD PRODUCTS 🛠 AVAILABLE FOR INTERNSHIPS •';
+  const text = 'REACT - NODE - MONGODB - PYTHON - BUILDING REAL-WORLD PRODUCTS - AVAILABLE FOR INTERNSHIPS -';
 
   return (
     <section className="marquee-section" aria-label="Skills and availability ticker">
