@@ -25,11 +25,11 @@ const BeyondCode = () => (
                 <img src="/avatar.png" alt="Volunteer activity" className="activity-avatar" />
               </div>
               <div className="activity-body">
-                
+                <p>
+                  Active in student-led technical initiatives, peer learning, and event coordination through the university community.
+                </p>
               </div>
             </article>
-
-            
           </div>
 
           <div className="beyond-right">

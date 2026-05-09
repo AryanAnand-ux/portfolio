@@ -203,7 +203,7 @@ const Terminal = () => {
         <span className="dot dot-yellow" />
         <span className="dot dot-green" />
       </div>
-      <div className="terminal-body" ref={containerRef}>
+      <div className="terminal-body" ref={containerRef} role="log" aria-live="polite" aria-relevant="additions text">
         {lines.map((line, index) => (
           <div key={`${line}-${index}`} className={`terminal-line ${line.startsWith(PROMPT.trim()) ? 'prompt-line' : ''}`}>
             {line}

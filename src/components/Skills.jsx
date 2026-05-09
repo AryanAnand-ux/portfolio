@@ -2,6 +2,15 @@
 import { arsenalData } from '../data/skills';
 import './Skills.css';
 
+const colorMap = {
+  Languages: 'var(--accent-pink)',
+  Frontend: 'var(--accent-blue)',
+  Backend: 'var(--accent-green)',
+  Databases: 'var(--accent-yellow)',
+  'Core CS': 'var(--accent-orange)',
+  'Tools & Cloud': 'var(--accent-purple)',
+};
+
 const Skills = () => (
   <section id="skills" className="section">
     <div className="container">
@@ -16,15 +25,6 @@ const Skills = () => (
 
           <div className="skills-cards-grid">
           {arsenalData.map((group) => {
-            // choose a color per category to match the screenshot
-            const colorMap = {
-              Languages: 'var(--accent-pink)',
-              Frontend: 'var(--accent-blue)',
-              Backend: 'var(--accent-green)',
-              Databases: 'var(--accent-yellow)',
-              'Core CS': 'var(--accent-orange)',
-              'Tools & Cloud': 'var(--accent-purple)',
-            };
             const labelColor = colorMap[group.title] || 'var(--accent-purple)';
 
             return (

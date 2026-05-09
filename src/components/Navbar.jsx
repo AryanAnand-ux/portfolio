@@ -21,7 +21,8 @@ const Navbar = () => {
       },
       { rootMargin: '-40% 0px -60% 0px' }
     );
-    document.querySelectorAll('section').forEach((el) => observer.observe(el));
+    // Observe only sections with valid IDs to prevent empty active states.
+    document.querySelectorAll('section[id]').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
@@ -60,8 +61,30 @@ const Navbar = () => {
         setIsMobileMenuOpen(false);
       }
     };
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
     document.addEventListener('mousedown', handleOutsideClick);
-    return () => document.removeEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    // Prevent background scroll when the mobile menu is expanded.
+    if (!isMobileMenuOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
   }, [isMobileMenuOpen]);
 
   const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
