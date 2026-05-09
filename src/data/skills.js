@@ -1,55 +1,35 @@
 export const arsenalData = [
   {
-    id: 'dev',
-    icon: 'Code2',
-    title: 'Development',
-    tags: [
-      { label: 'MERN Stack', color: 'var(--accent-blue)' },
-      { label: 'Next.js', color: 'var(--accent-purple)' },
-      { label: 'TypeScript', color: 'var(--accent-yellow)' },
-      { label: 'C++ (DSA)', color: null },
-      { label: 'Python', color: null },
-    ],
+    id: 'languages',
+    title: 'Languages',
+    tags: ['Java', 'Python', 'JavaScript', 'C'],
   },
   {
-    id: 'security',
-    icon: 'Shield',
-    title: 'Security & Architecture',
-    tags: [
-      { label: 'App Security', color: 'var(--accent-green)' },
-      { label: 'GraphQL', color: null },
-      { label: 'REST APIs', color: null },
-    ],
+    id: 'frontend',
+    title: 'Frontend',
+    tags: ['React.js', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite', 'Responsive Design'],
   },
   {
-    id: 'design',
-    icon: 'PenTool',
-    title: 'Design',
-    tags: [
-      { label: 'Figma', color: 'var(--accent-purple)' },
-      { label: 'UI/UX', color: null },
-      { label: 'Tailwind CSS', color: 'var(--accent-blue)' },
-    ],
+    id: 'backend',
+    title: 'Backend',
+    tags: ['Node.js', 'Express.js', 'REST APIs', 'JWT Auth'],
+  },
+  {
+    id: 'databases',
+    title: 'Databases',
+    tags: ['MongoDB', 'SQL'],
+  },
+  {
+    id: 'corecs',
+    title: 'Core CS',
+    tags: ['DSA', 'OOP', 'OS', 'Computer Networks', 'Distributed Systems'],
+  },
+  {
+    id: 'tools',
+    title: 'Tools & Cloud',
+    tags: ['Git', 'GitHub', 'GCP', 'AWS', 'Postman'],
   },
 ];
 
-export const milestonesData = [
-  {
-    id: 'elite-hack',
-    iconColor: '#f59e0b',
-    title: 'Winner, Elite Hack 1.0',
-    description: 'Secured first place among 100+ teams with an innovative AI solution.',
-  },
-  {
-    id: 'mobilothon',
-    iconColor: '#3b82f6',
-    title: 'Finalist, i.mobilothon 5.0',
-    description: 'Recognized for building scalable mobile-first architectures.',
-  },
-  {
-    id: 'microsoft',
-    iconColor: '#10b981',
-    title: 'Microsoft Elevate AICTE Alumnus',
-    description: 'Completed advanced training in cloud computing and AI technologies.',
-  },
-];
+// milestones removed from UI for now — data kept here if needed later
+export const milestonesData = [];

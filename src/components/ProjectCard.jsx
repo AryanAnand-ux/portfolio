@@ -2,11 +2,19 @@ import { ExternalLink } from 'lucide-react';
 import { GitHubIcon } from './icons';
 import './Projects.css';
 
-const ProjectCard = ({ title, description, tech, link, github, layoutClass }) => (
+const ProjectCard = ({ title, description, details, tech, link, github, layoutClass }) => (
   <div className={`project-card brut-box ${layoutClass}`}>
     <div className="project-content">
       <h3 className="project-title">{title}</h3>
       <p className="project-desc">{description}</p>
+
+      {Array.isArray(details) && details.length > 0 && (
+        <ul className="project-details">
+          {details.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
 
       <div className="project-tech">
         {tech.map((t) => (

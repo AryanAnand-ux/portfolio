@@ -20,6 +20,48 @@
   flex: 1;
 }
 
+.skills-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  grid-column: 1/-1;
+}
+
+.skill-card {
+  padding: 1.25rem 1.5rem;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skill-label {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  font-weight: 900;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 22px;
+  box-shadow: 4px 4px 0px var(--border-color);
+  align-self: flex-start;
+}
+
+/* Large panel that contains all skill cards (matches screenshot) */
+.skills-panel {
+  background-color: var(--accent-blue);
+  padding: 1.45rem 1.5rem 1.35rem;
+  border-radius: calc(var(--border-radius) + 8px);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 12px 12px 0px var(--border-color);
+  grid-column: 1/-1;
+}
+
+.skill-card .arsenal-tags {
+  display:flex;
+  gap:0.6rem;
+  flex-wrap:wrap;
+  margin-top: 0.4rem;
+}
+
 .arsenal-title {
   display: flex;
   align-items: center;
@@ -74,5 +116,31 @@
 @media (max-width: 900px) {
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+  .skills-cards-grid { grid-template-columns: 1fr; }
+  .skill-card { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .skills-panel {
+    padding: 1rem 1rem 0.85rem;
+  }
+
+  .skills-cards-grid {
+    gap: 0.8rem;
+  }
+
+  .skill-card {
+    padding: 0.85rem 1rem;
+    min-height: 90px;
+  }
+
+  .skill-label {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .arsenal-tags {
+    gap: 0.5rem;
   }
 }

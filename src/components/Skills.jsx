@@ -1,72 +1,46 @@
 
-import { Code2, Shield, PenTool, Trophy } from 'lucide-react';
-import { arsenalData, milestonesData } from '../data/skills';
+import { arsenalData } from '../data/skills';
 import './Skills.css';
-
-const ICON_MAP = { Code2, Shield, PenTool };
 
 const Skills = () => (
   <section id="skills" className="section">
     <div className="container">
       <div className="skills-grid reveal">
 
-        {/* Arsenal Column */}
-        <div className="arsenal-column">
-          <div style={{ marginBottom: '1.5rem' }}>
+        <div className="skills-panel brut-box">
+          <div style={{ marginBottom: '1.5rem', gridColumn: '1/-1', textAlign: 'center' }}>
             <h2
               className="section-title"
-              style={{ backgroundColor: 'var(--accent-green)', fontSize: '2.5rem', marginBottom: 0, transform: 'rotate(-1deg)' }}
+              style={{ backgroundColor: 'var(--accent-yellow)', fontSize: '2.5rem', marginBottom: 0, transform: 'rotate(-1deg)' }}
             >
-              Arsenal
+              Skills
             </h2>
           </div>
-          <div className="arsenal-box brut-box">
-            {arsenalData.map((group) => {
-              const Icon = ICON_MAP[group.icon];
-              return (
-                <div key={group.id} className="arsenal-group">
-                  <div className="arsenal-title">
-                    {Icon && <Icon size={20} />} {group.title}
-                  </div>
-                  <div className="arsenal-tags">
-                    {group.tags.map((tag) => (
-                      <span
-                        key={tag.label}
-                        className="bento-pill"
-                        style={tag.color ? { backgroundColor: tag.color } : undefined}
-                      >
-                        {tag.label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
 
-        {/* Milestones Column */}
-        <div className="milestones-column">
-          <div style={{ marginBottom: '1.5rem' }}>
-            <h2
-              className="section-title"
-              style={{ backgroundColor: 'var(--accent-orange)', fontSize: '2.5rem', marginBottom: 0, transform: 'rotate(2deg)' }}
-            >
-              Milestones
-            </h2>
-          </div>
-          <div className="milestones-list">
-            {milestonesData.map((m) => (
-              <div key={m.id} className="milestone-card brut-box">
-                <div className="milestone-icon">
-                  <Trophy size={24} color={m.iconColor} />
-                </div>
-                <div className="milestone-content">
-                  <h4>{m.title}</h4>
-                  <p>{m.description}</p>
+          <div className="skills-cards-grid">
+          {arsenalData.map((group) => {
+            // choose a color per category to match the screenshot
+            const colorMap = {
+              Languages: 'var(--accent-pink)',
+              Frontend: 'var(--accent-blue)',
+              Backend: 'var(--accent-green)',
+              Databases: 'var(--accent-yellow)',
+              'Core CS': 'var(--accent-orange)',
+              'Tools & Cloud': 'var(--accent-purple)',
+            };
+            const labelColor = colorMap[group.title] || 'var(--accent-purple)';
+
+            return (
+              <div key={group.id} className="skill-card brut-box">
+                <div className="skill-label" style={{ backgroundColor: labelColor }}>{group.title}</div>
+                <div className="arsenal-tags">
+                  {group.tags.map((t) => (
+                    <span key={t} className="bento-pill">{t}</span>
+                  ))}
                 </div>
               </div>
-            ))}
+            );
+          })}
           </div>
         </div>
 

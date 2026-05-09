@@ -65,6 +65,7 @@ const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   const navClass = [
     'navbar',
@@ -75,16 +76,23 @@ const Navbar = () => {
   return (
     <nav ref={navRef} className={navClass}>
       <div className="container nav-content">
-        <a href="#" className="nav-logo" onClick={() => setIsMobileMenuOpen(false)}>
-          Aryan<span>.</span>
+        <a href="#hero" className="nav-logo" onClick={closeMenu}>
+          Portfolio<span>.</span>
         </a>
-        <div className={`nav-links ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
-          <a href="#about" onClick={toggleMenu} className={`nav-link brut-box ${activeSection === 'about' ? 'active' : ''}`}>About</a>
-          <a href="#projects" onClick={toggleMenu} className={`nav-link brut-box ${activeSection === 'projects' ? 'active' : ''}`}>Projects</a>
-          <a href="#skills" onClick={toggleMenu} className={`nav-link brut-box ${activeSection === 'skills' ? 'active' : ''}`}>Skills</a>
-          <a href="#contact" onClick={toggleMenu} className={`brut-btn nav-cta ${activeSection === 'contact' ? 'active' : ''}`}>Get in Touch</a>
+        <div id="nav-links" className={`nav-links ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
+          <a href="#projects" onClick={closeMenu} className={`nav-link brut-box ${activeSection === 'projects' ? 'active' : ''}`}>Projects</a>
+          <a href="#skills" onClick={closeMenu} className={`nav-link brut-box ${activeSection === 'skills' ? 'active' : ''}`}>Skills</a>
+          <a href="#education" onClick={closeMenu} className={`nav-link brut-box ${activeSection === 'education' ? 'active' : ''}`}>Education</a>
+          <a href="#beyond-code" onClick={closeMenu} className={`nav-link brut-box ${activeSection === 'beyond-code' ? 'active' : ''}`}>Extra-Curriculars</a>
+          <a href="#contact" onClick={closeMenu} className={`brut-btn nav-cta ${activeSection === 'contact' ? 'active' : ''}`}>Get in Touch</a>
         </div>
-        <button className="mobile-menu-btn brut-box" onClick={toggleMenu} aria-label="Toggle navigation menu">
+        <button
+          className="mobile-menu-btn brut-box"
+          onClick={toggleMenu}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="nav-links"
+        >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
