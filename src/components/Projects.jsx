@@ -7,11 +7,11 @@ const Projects = () => (
   <section id="projects" className="section">
     <div className="container">
       <div className="projects-panel brut-box reveal">
-        <div className="section-header-wrap" style={{ textAlign: 'left', marginBottom: '2rem' }}>
-          <h2 className="section-title" style={{ backgroundColor: 'var(--accent-blue)', transform: 'rotate(-2deg)' }}>
+        <div className="section-header-wrap projects-header">
+          <h2 className="section-title projects-title">
             Projects
           </h2>
-          <p style={{ fontSize: '1.2rem', color: '#555', marginTop: '1rem', marginLeft: '0.5rem' }}>
+          <p className="projects-subtitle">
             Building intelligent systems and robust architectures.
           </p>
         </div>

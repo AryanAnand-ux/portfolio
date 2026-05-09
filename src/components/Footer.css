@@ -61,5 +61,17 @@
 
   .footer-copy {
     font-size: 0.8rem;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-footer {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .footer-icon-link {
+    width: 36px;
+    height: 36px;
   }
 }

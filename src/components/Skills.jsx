@@ -8,11 +8,8 @@ const Skills = () => (
       <div className="skills-grid reveal">
 
         <div className="skills-panel brut-box">
-          <div style={{ marginBottom: '1.5rem', gridColumn: '1/-1', textAlign: 'center' }}>
-            <h2
-              className="section-title"
-              style={{ backgroundColor: 'var(--accent-yellow)', fontSize: '2.5rem', marginBottom: 0, transform: 'rotate(-1deg)' }}
-            >
+          <div className="skills-header">
+            <h2 className="section-title skills-title">
               Skills
             </h2>
           </div>

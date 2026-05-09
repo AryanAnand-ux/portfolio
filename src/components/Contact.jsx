@@ -5,8 +5,8 @@ import './Contact.css';
 const Contact = () => (
   <section id="contact" className="section">
     <div className="container center-wrap">
-      <div className="section-header-wrap reveal contact-title-wrap" style={{ marginBottom: '2rem' }}>
-        <h2 className="section-title" style={{ backgroundColor: 'var(--accent-pink)' }}>
+      <div className="section-header-wrap reveal contact-title-wrap">
+        <h2 className="section-title contact-title">
           Let&apos;s Talk
         </h2>
       </div>

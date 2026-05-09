@@ -6,7 +6,7 @@ const BeyondCode = () => (
     <div className="container">
       <div className="beyond-panel brut-box reveal">
         <div className="beyond-header-wrap">
-          <h2 className="section-title" style={{ backgroundColor: 'var(--accent-green)', transform: 'rotate(-2deg)' }}>
+          <h2 className="section-title beyond-title">
             Beyond Code
           </h2>
         </div>

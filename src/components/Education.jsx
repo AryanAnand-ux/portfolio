@@ -113,8 +113,8 @@ const Education = () => {
     <section id="education" className="section">
       <div className="container">
         <div className="education-panel brut-box reveal">
-          <div className="edu-header" style={{ gridColumn: '1/-1', textAlign: 'center', marginBottom: '1rem' }}>
-            <h2 className="section-title" style={{ backgroundColor: 'var(--accent-purple)', transform: 'rotate(-2deg)' }}>
+          <div className="edu-header">
+            <h2 className="section-title edu-title">
               Education
             </h2>
           </div>

@@ -17,6 +17,12 @@
 .prompt { color:#6be26b; font-family: ui-monospace, monospace; }
 .terminal-input { flex:1; background:transparent; color:#9be6a4; border:none; outline:none; font-family: ui-monospace, monospace; font-size:0.95rem; }
 
+.terminal-line,
+.terminal-input {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 900px) {
   .terminal-body { max-height: 180px; }
 }
@@ -57,5 +63,21 @@
 
   .terminal-input {
     font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .terminal-body {
+    font-size: 0.76rem;
+    padding: 0.55rem;
+  }
+
+  .terminal-input-form {
+    flex-wrap: wrap;
+  }
+
+  .terminal-input {
+    flex-basis: 100%;
+    font-size: 0.76rem;
   }
 }

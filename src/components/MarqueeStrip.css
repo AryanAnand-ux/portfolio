@@ -65,3 +65,14 @@
     animation: marquee-scroll 14s linear infinite;
   }
 }
+
+@media (max-width: 360px) {
+  .marquee-section {
+    padding-bottom: 1rem;
+  }
+
+  .marquee-track {
+    gap: 1rem;
+    font-size: 0.82rem;
+  }
+}
