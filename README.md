@@ -1,6 +1,6 @@
-# Aryan's Portfolio
+# My Portfolio
 
-Personal portfolio for Aryan Anand, built as a clean single-page React app to showcase projects, skills, education, and contact details.
+This is my Personal Portfolio(Fell free to visit) , built as a clean single-page React app to showcase projects, skills, education, and contact details.
 
 ## What’s Included
 
