@@ -144,7 +144,7 @@ const Education = () => {
                 <h3>B.Tech CSE</h3>
                 <small>Jaypee University Of Engineering And Technology, Guna</small>
                 <ul>
-                  <li>Relevant Coursework: DSA, OOP, DBMS, OS</li>
+                  <li>Relevant Coursework: DSA, OOP, DBMS</li>
                   <li>Focus: Full Stack Development & AI</li>
                 </ul>
               </div>

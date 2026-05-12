@@ -47,7 +47,7 @@ const Hero = () => (
               I am a <span className="hero-highlight">2nd-year student at JUET, Guna</span>, pursuing Bachelor of Technology in Computer Science and Engineering.
             </p>
             <p className="hero-lead hero-lead-secondary">
-              I have strong aptitude, technical, and communication skills, and a logical approach to problem-solving. My diverse schooling across India has made me adaptable and eager to create.
+              I have strong aptitude, technical, and communication skills, and a logical approach to problem-solving.
             </p>
 
             <div className="hero-cta-actions">

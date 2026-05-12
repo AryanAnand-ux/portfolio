@@ -126,15 +126,73 @@
 .project-card {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   background-color: #fff;
   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   padding: 2.5rem;
+  position: relative;
 }
 
 .project-card:hover {
   transform: translate(-4px, -4px);
   box-shadow: 8px 8px 0px var(--border-color);
+}
+
+.project-link-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff0000;
+  color: #fff;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px var(--border-color);
+  z-index: 10;
+}
+
+.project-link-badge:hover {
+  background-color: #cc0000;
+  transform: scale(1.1);
+  box-shadow: 6px 6px 0px var(--border-color);
+}
+
+.project-link-badge .live-text {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .project-link-badge {
+    width: 50px;
+    height: 50px;
+    top: -5px;
+    right: -5px;
+    box-shadow: 3px 3px 0px var(--border-color);
+  }
+  
+  .project-link-badge:hover {
+    box-shadow: 4px 4px 0px var(--border-color);
+  }
+}
+
+@keyframes flashing {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.project-link-badge {
+  animation: flashing 1.5s ease-in-out infinite;
 }
 
 .project-content {

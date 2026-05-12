@@ -7,12 +7,12 @@ export const arsenalData = [
   {
     id: 'frontend',
     title: 'Frontend',
-    tags: ['React.js', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite', 'Responsive Design'],
+    tags: ['React.js', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite'],
   },
   {
     id: 'backend',
     title: 'Backend',
-    tags: ['Node.js', 'Express.js', 'REST APIs', 'JWT Auth'],
+    tags: ['Node.js', 'Express.js', 'REST APIs'],
   },
   {
     id: 'databases',
@@ -22,11 +22,11 @@ export const arsenalData = [
   {
     id: 'corecs',
     title: 'Core CS',
-    tags: ['DSA', 'OOP', 'OS', 'Computer Networks', 'Distributed Systems'],
+    tags: ['DSA', 'OOP'],
   },
   {
     id: 'tools',
     title: 'Tools & Cloud',
-    tags: ['Git', 'GitHub', 'GCP', 'AWS', 'Postman'],
+    tags: ['Git', 'GitHub'],
   },
 ];
