@@ -22,7 +22,7 @@ const BeyondCode = () => (
                   </div>
                   <span className="activity-date">2024 - Present</span>
                 </div>
-                <img src="/avatar.png" alt="Volunteer activity" className="activity-avatar" />
+                <img src="/avatar.png" alt="Aryan Anand - ISF member activity" className="activity-avatar" width="80" height="80" />
               </div>
               <div className="activity-body">
                 <p>

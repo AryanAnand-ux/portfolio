@@ -62,7 +62,7 @@ function App() {
         }
       `}</style>
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <Skills />
         <Projects />

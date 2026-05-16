@@ -88,6 +88,26 @@ section,
   min-width: 0;
 }
 
+/* Skip-to-content link for keyboard accessibility */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--text-color);
+  color: var(--bg-color);
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,

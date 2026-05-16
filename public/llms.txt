@@ -1,0 +1,41 @@
+# Aryan Anand — Portfolio
+
+> Personal portfolio of Aryan Anand, a full-stack developer and AI engineer specializing in the MERN stack, scalable web architectures, and intelligent systems.
+
+## About
+
+- Name: Aryan Anand
+- Role: Software Engineer & AI Architect
+- Status: 2nd-year B.Tech CSE student at JUET, Guna (2024–2028)
+- Location: Guna, Madhya Pradesh, India
+- Contact: aryan.anand1806@gmail.com
+
+## Social Profiles
+
+- GitHub: https://github.com/AryanAnand-ux
+- LinkedIn: https://www.linkedin.com/in/aryananand-ux
+
+## Skills & Expertise
+
+- Languages: JavaScript, TypeScript, Python, C++, SQL
+- Frontend: React, Next.js, HTML5, CSS3
+- Backend: Node.js, Express.js, GraphQL, REST APIs
+- Databases: MongoDB, Firebase, PostgreSQL
+- Tools & Cloud: Git, Docker, Vercel, Render, Vite
+
+## Projects
+
+- Loom: AI-powered smart wardrobe application using MERN stack and Google Gemini AI
+- GraphQL vs REST: Comparative analysis and implementation of API paradigms
+- File Converter: Browser-based multi-format file conversion tool
+- Global Cybersecurity Breach Analytics: Data visualization dashboard for breach intelligence
+
+## Achievements
+
+- Winner, Elite Hack 1.0 hackathon (1st among 100+ teams)
+- Finalist, i.mobilothon 5.0
+- Microsoft Elevate AICTE Alumnus (cloud computing & AI)
+
+## Site Structure
+
+This is a single-page portfolio. Sections: Hero, Skills, Projects, Beyond Code, Education, Contact.

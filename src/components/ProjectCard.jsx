@@ -10,8 +10,8 @@ const ProjectCard = ({ title, description, details, tech, projectLink, link, git
         target="_blank"
         rel="noopener noreferrer"
         className="project-link-badge"
-        aria-label="Open live project"
-        title="Open live project"
+        aria-label={`Open live demo of ${title}`}
+        title={`Open live demo of ${title}`}
       >
         <ExternalLink size={18} />
         <span className="live-text">live project</span>
@@ -38,8 +38,15 @@ const ProjectCard = ({ title, description, details, tech, projectLink, link, git
       <div className="project-links-container">
         <div className="project-links">
           {github && (
-            <a href={github} target="_blank" rel="noopener noreferrer" className="brut-btn" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <GitHubIcon size={20} /> GitHub
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="brut-btn"
+              aria-label={`View ${title} source code on GitHub`}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            >
+              <GitHubIcon size={20} /> View on GitHub
             </a>
           )}
         </div>

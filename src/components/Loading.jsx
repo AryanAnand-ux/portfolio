@@ -42,7 +42,7 @@ const Loading = ({ isComplete, onComplete }) => {
       <div className="loading-container">
         <div className="loading-scanlines"></div>
         <div className="loading-content">
-          <h1 className="loading-title">LOADING...</h1>
+          <div className="loading-title" role="status" aria-live="polite" aria-label={`Loading: ${progress}%`}>LOADING...</div>
           <div className="loading-bar-wrapper">
             <div className="loading-bar" style={{ width: `${progress}%` }}></div>
           </div>

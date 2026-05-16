@@ -12,7 +12,7 @@ const Hero = () => (
         <aside className="profile-card reveal">
           <div className="profile-sticker" aria-hidden />
           <div className="profile-avatar-wrap">
-            <img src="/avatar.png" alt="Aryan Anand - Avatar" className="hero-avatar" width="300" height="300" />
+            <img src="/avatar.png" alt="Aryan Anand - Avatar" className="hero-avatar" width="300" height="300" fetchpriority="high" />
           </div>
           <h3 className="profile-name">ARYAN ANAND</h3>
           <div className="profile-subtitle">AI Engineer & FULL_STACK_DEVELOPER()</div>
