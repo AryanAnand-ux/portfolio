@@ -38,21 +38,14 @@ const Loading = ({ isComplete, onComplete }) => {
   if (isComplete) return null;
 
   return (
-    <div className="loading-overlay">
-      <div className="loading-container">
-        <div className="loading-scanlines"></div>
-        <div className="loading-content">
-          <div className="loading-title" role="status" aria-live="polite" aria-label={`Loading: ${progress}%`}>LOADING...</div>
-          <div className="loading-bar-wrapper">
-            <div className="loading-bar" style={{ width: `${progress}%` }}></div>
-          </div>
-          <div className="loading-percent">{progress}%</div>
-        </div>
-        <div className="loading-device">
-          <div className="device-notch"></div>
-          <div className="device-speaker"></div>
-        </div>
-      </div>
+    <div className="loading-overlay" role="status" aria-label={`Loading: ${progress}%`}>
+      <div className="loading-scanlines"></div>
+      <img
+        src="/good-1.gif"
+        alt="Loading..."
+        className="loading-gif"
+        aria-hidden="true"
+      />
     </div>
   );
 };
