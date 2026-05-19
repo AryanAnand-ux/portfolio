@@ -3,6 +3,7 @@ import { vi } from 'vitest';
 import Navbar from './Navbar';
 
 describe('Navbar', () => {
+  const NAV_SECTION_IDS = ['projects', 'skills', 'education', 'beyond-code', 'contact'];
   const observers = [];
 
   beforeEach(() => {
@@ -23,7 +24,7 @@ describe('Navbar', () => {
       return 1;
     });
     Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true });
-    ['projects', 'skills', 'education', 'beyond-code', 'contact'].forEach((id) => {
+    NAV_SECTION_IDS.forEach((id) => {
       const section = document.createElement('section');
       section.id = id;
       document.body.appendChild(section);

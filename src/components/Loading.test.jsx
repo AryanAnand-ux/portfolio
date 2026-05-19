@@ -3,6 +3,7 @@ import { vi } from 'vitest';
 import Loading from './Loading';
 
 describe('Loading', () => {
+  const FRAME_TIME_MS = 1100;
   let now = 0;
 
   beforeEach(() => {
@@ -10,7 +11,7 @@ describe('Loading', () => {
     vi.useFakeTimers();
     vi.spyOn(performance, 'now').mockImplementation(() => now);
     vi.stubGlobal('requestAnimationFrame', (cb) => setTimeout(() => {
-      now += 1100;
+      now += FRAME_TIME_MS;
       cb(now);
       return now;
     }, 0));
