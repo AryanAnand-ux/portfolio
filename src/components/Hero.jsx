@@ -20,7 +20,7 @@ const Hero = () => (
           <hr className="profile-divider" />
 
           <div className="profile-meta">
-            <div><span className="meta-key key-location">[LOCATION]</span><span> Guna, MP</span></div>
+            <div><span className="meta-key key-location">[LOCATION]</span><span> Bhopal, MP</span></div>
             <div><span className="meta-key key-status">[STATUS]</span><span> 2ND YEAR BTECH STUDENT</span></div>
             <div><span className="meta-key key-mission">[MISSION]</span><span> Code. Play. Chill.</span></div>
           </div>
