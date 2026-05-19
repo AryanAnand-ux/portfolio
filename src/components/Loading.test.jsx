@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import Loading from './Loading';
 
@@ -33,7 +33,9 @@ describe('Loading', () => {
     const onComplete = vi.fn();
     render(<Loading isComplete={false} onComplete={onComplete} />);
 
-    vi.runAllTimers();
+    act(() => {
+      vi.runAllTimers();
+    });
 
     expect(onComplete).toHaveBeenCalledTimes(1);
   });

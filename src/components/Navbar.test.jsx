@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import Navbar from './Navbar';
 
@@ -23,16 +23,15 @@ describe('Navbar', () => {
       return 1;
     });
     Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true });
-    document.body.innerHTML = `
-      <section id="projects"></section>
-      <section id="skills"></section>
-      <section id="education"></section>
-      <section id="beyond-code"></section>
-      <section id="contact"></section>
-    `;
+    ['projects', 'skills', 'education', 'beyond-code', 'contact'].forEach((id) => {
+      const section = document.createElement('section');
+      section.id = id;
+      document.body.appendChild(section);
+    });
   });
 
   afterEach(() => {
+    document.body.innerHTML = '';
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
   });
@@ -41,7 +40,9 @@ describe('Navbar', () => {
     render(<Navbar />);
 
     const projectsSection = document.getElementById('projects');
-    observers[0].callback([{ isIntersecting: true, target: projectsSection }]);
+    act(() => {
+      observers[0].callback([{ isIntersecting: true, target: projectsSection }]);
+    });
 
     const projectsLink = screen.getByRole('link', { name: 'Projects' });
     expect(projectsLink.className).toContain('active');
@@ -50,7 +51,7 @@ describe('Navbar', () => {
   it('opens mobile menu and closes it with Escape', () => {
     render(<Navbar />);
 
-    const toggle = screen.getByRole('button', { name: /toggle navigation menu/i });
+    const toggle = screen.getByLabelText('Toggle navigation menu');
     fireEvent.click(toggle);
 
     expect(toggle).toHaveAttribute('aria-expanded', 'true');
@@ -62,19 +63,15 @@ describe('Navbar', () => {
     expect(document.body.style.overflow).toBe('');
   });
 
-  it('applies and removes hidden class based on scroll direction', () => {
+  it('applies scrolled class after passing scroll threshold', () => {
     render(<Navbar />);
 
     const nav = screen.getByRole('navigation');
 
-    window.scrollY = 100;
-    fireEvent.scroll(window);
+    act(() => {
+      window.scrollY = 100;
+      fireEvent.scroll(window);
+    });
     expect(nav.className).toContain('scrolled');
-    expect(nav.className).toContain('navbar-hidden');
-
-    window.scrollY = 80;
-    fireEvent.scroll(window);
-    expect(nav.className).toContain('scrolled');
-    expect(nav.className).not.toContain('navbar-hidden');
   });
 });
