@@ -151,6 +151,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  contain: layout style; /* isolate repaint */
 }
 
 .projects-slider-container:active {
@@ -165,6 +166,7 @@
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .slider-card {
@@ -572,52 +574,75 @@
   }
 }
 
-@media (max-width: 480px) {
-  .projects-panel {
-    padding-bottom: 2.5rem;
+@media (max-width: 600px) {
+  /* ── Mobile flat view — eliminate ALL 3D GPU work ──────────────────
+     perspective + preserve-3d + rotateY + translateZ + box-reflect
+     are the primary causes of mobile lag. Replace with a simple
+     opacity-only fade so the browser compositor handles everything.
+  ────────────────────────────────────────────────────────────────── */
+  .projects-slider-container {
+    height: auto !important;
+    min-height: 360px;
+    perspective: none !important;
+    perspective-origin: unset;
+    margin: 0.75rem 0 1rem;
+    cursor: default;
   }
 
-  .projects-slider-container {
-    height: 390px;
-    margin: 1rem 0;
+  .projects-slider-track {
+    transform-style: flat !important;
+    will-change: auto;
+    height: auto !important;
   }
-  
+
+  /* All cards: hidden, flat, no 3D */
   .slider-card {
-    width: 250px;
-    height: 290px;
-    -webkit-box-reflect: below 6px linear-gradient(
-      to bottom,
-      transparent 65%,
-      rgba(255, 255, 255, 0.2) 100%
-    );
+    position: absolute;
+    width: 90vw;
+    max-width: 340px;
+    height: auto !important;
+    min-height: 280px;
+    transform: none !important;
+    -webkit-box-reflect: unset !important;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    will-change: opacity;
   }
 
   .slider-card .project-card {
-    padding: 1.25rem 1.1rem !important;
+    height: auto !important;
+    padding: 1.2rem 1rem !important;
+    box-shadow: 5px 5px 0px var(--border-color) !important;
+    transform: none !important;
   }
 
-  .slider-card.left-1 {
-    transform: translateX(-120px) translateZ(0px) rotateY(25deg) scale(0.82);
-    opacity: 0.7;
+  /* Only active card is shown and takes normal layout space */
+  .slider-card.active {
+    position: relative !important;
+    opacity: 1;
+    pointer-events: auto;
   }
 
-  .slider-card.left-2 {
-    transform: translateX(-195px) translateZ(-60px) rotateY(30deg) scale(0.7);
-    opacity: 0.2;
+  /* Remove side-card peeking entirely */
+  .slider-card.left-1,
+  .slider-card.left-2,
+  .slider-card.left-far,
+  .slider-card.right-1,
+  .slider-card.right-2,
+  .slider-card.right-far {
+    opacity: 0;
+    pointer-events: none;
+    transform: none !important;
   }
 
-  .slider-card.right-1 {
-    transform: translateX(120px) translateZ(0px) rotateY(-25deg) scale(0.82);
-    opacity: 0.7;
-  }
-
-  .slider-card.right-2 {
-    transform: translateX(195px) translateZ(-60px) rotateY(-30deg) scale(0.7);
-    opacity: 0.2;
-  }
-  
   .slider-controls {
-    gap: 1.25rem;
-    margin-top: 1rem;
+    gap: 1rem;
+    margin-top: 0.85rem;
+  }
+
+  .control-btn {
+    width: 44px;
+    height: 44px;
   }
 }
