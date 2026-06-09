@@ -2,31 +2,25 @@ import { useEffect, useState, useRef } from 'react';
 import './Loading.css';
 
 // ─────────────────────────────────────────────────────────────────
-// 3D Loading Animation — mobile-optimised
+// 3D Loading Animation — faithful to Figma design
 //
-// Key perf improvements vs previous version:
-//  • No per-orb ctx.filter calls (was 18 GPU filter state changes/frame)
-//  • Depth blur simulated via radial gradient alpha falloff — zero GPU cost
-//  • DPR capped at 1 on low-end devices (no 3× overdraw on Retina mobile)
-//  • Fewer orbs + smaller canvas on mobile
+// Figma structure: 4 arcs × 5 ellipses. Each ellipse is 100px tall
+// with widths 10 → 25 → 50 → 75 → 100 px (perspective foreshortening).
+// Blur: 22px (back) → 0 (front). Opacity: ~0 (back) → 1 (front).
+//
+// Implementation: 18 white discs on a 3D ring, tilted ~17° from
+// edge-on view. CSS canvas filter: blur() per-orb for real gaussian.
+// Painter's algorithm back-to-front. Smooth rotation animation.
 // ─────────────────────────────────────────────────────────────────
 
-const isMobile = () =>
-  typeof window !== 'undefined' && window.innerWidth <= 600;
-
-const getConfig = () => {
-  const mobile = isMobile();
-  return {
-    NUM_ORBS:    mobile ? 12 : 18,
-    RING_RADIUS: mobile ? 95  : 155,
-    TILT:        0.30,
-    ORB_HEIGHT:  mobile ? 44  : 65,
-    ORB_WIDTH:   mobile ? 44  : 65,
-    CANVAS_W:    mobile ? 340 : 620,
-    CANVAS_H:    mobile ? 200 : 320,
-    ROT_SPEED:   0.013,
-  };
-};
+const NUM_ORBS    = 18;
+const RING_RADIUS = 155;   // px — ring radius
+const TILT        = 0.30;  // rad ≈ 17° — tilt from edge-on (controls vertical spread)
+const ORB_HEIGHT  = 65;    // px — constant orb height
+const ORB_WIDTH   = 65;    // px — max orb width (at front, face-on)
+const CANVAS_W    = 620;   // px — canvas width (includes blur halos)
+const CANVAS_H    = 320;   // px — canvas height
+const ROT_SPEED   = 0.013; // rad/frame — rotation speed
 
 const Loading = ({ isComplete, onComplete }) => {
   const [fadingOut, setFadingOut]   = useState(false);
@@ -39,18 +33,12 @@ const Loading = ({ isComplete, onComplete }) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const cfg = getConfig();
-    const {
-      NUM_ORBS, RING_RADIUS, TILT,
-      ORB_HEIGHT, ORB_WIDTH, CANVAS_W, CANVAS_H, ROT_SPEED,
-    } = cfg;
-
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) return; // Safeguard for headless test environments (jsdom)
 
-    // Cap DPR at 1 on mobile to avoid 2–3× overdraw
-    const DPR = Math.min(window.devicePixelRatio || 1, isMobile() ? 1 : 2);
+    const DPR = window.devicePixelRatio || 1;
 
+    // HiDPI canvas
     canvas.width        = CANVAS_W * DPR;
     canvas.height       = CANVAS_H * DPR;
     canvas.style.width  = `${CANVAS_W}px`;
@@ -72,58 +60,51 @@ const Loading = ({ isComplete, onComplete }) => {
       for (let i = 0; i < NUM_ORBS; i++) {
         const theta = angleRef.current + (i / NUM_ORBS) * Math.PI * 2;
 
+        // 3D position on ring (ring lies in XZ plane)
         const x3 = RING_RADIUS * Math.cos(theta);
         const z3 = RING_RADIUS * Math.sin(theta);
 
+        // Tilt ring around X-axis → screen projection
         const screenX = cx + x3;
         const screenY = cy - z3 * sinTilt;
-        const depth   = z3 * cosTilt;
+        const depth   = z3 * cosTilt;   // positive = closer to viewer
 
         // Depth factor: 0 = back, 1 = front
         const t = (z3 + RING_RADIUS) / (2 * RING_RADIUS);
 
-        // Foreshortening — disc width narrows as disc turns edge-on
-        const tangentZ   = Math.cos(theta) * cosTilt;
+        // Foreshortening — disc normal is tangent to ring
+        // tangent at θ: (-sin θ, 0, cos θ)
+        // after tilt, z-component = cos θ · cos(tilt)
+        const tangentZ = Math.cos(theta) * cosTilt;
         const faceFactor = Math.sqrt(1 - tangentZ * tangentZ);
 
-        const w = Math.max(2, ORB_WIDTH  * faceFactor);
+        // Orb width shrinks as disc turns edge-on
+        const w = Math.max(3, ORB_WIDTH * faceFactor);
         const h = ORB_HEIGHT;
 
-        // Opacity: back → front  (0.05 → 1.0)
-        const opacity = 0.05 + t * 0.95;
+        // Depth-based blur: heavy at back, none at front
+        // Matches Figma values: blur(22px) → blur(0px)
+        const blur = (1 - t) * 22;
 
-        // Blur radius used ONLY for the gradient falloff radius multiplier
-        // No ctx.filter calls → zero GPU state-switch cost
-        const blurSpread = 1 + (1 - t) * 3.5; // 1× (front) → 4.5× (back)
+        // Depth-based opacity: faded at back, solid at front
+        const opacity = 0.06 + t * 0.94;
 
-        orbs.push({ screenX, screenY, w, h, opacity, blurSpread, depth });
+        orbs.push({ screenX, screenY, w, h, blur, opacity, depth });
       }
 
       // ── Painter's algorithm: back → front ──────────────────
       orbs.sort((a, b) => a.depth - b.depth);
 
-      orbs.forEach(({ screenX, screenY, w, h, opacity, blurSpread }) => {
-        const rX = (w / 2) * blurSpread;
-        const rY = (h / 2) * blurSpread;
-
-        // Radial gradient simulates gaussian glow — GPU-friendly, no filter API
-        const grad = ctx.createRadialGradient(
-          screenX, screenY, 0,
-          screenX, screenY, Math.max(rX, rY),
-        );
-        grad.addColorStop(0,    `rgba(255,255,255,${opacity})`);
-        grad.addColorStop(0.45, `rgba(255,255,255,${opacity * 0.65})`);
-        grad.addColorStop(1,    'rgba(255,255,255,0)');
-
+      orbs.forEach(({ screenX, screenY, w, h, blur, opacity }) => {
         ctx.save();
-        ctx.scale(rX / Math.max(rX, rY), rY / Math.max(rX, rY));
-        const sx = screenX / (rX / Math.max(rX, rY));
-        const sy = screenY / (rY / Math.max(rX, rY));
+        ctx.globalAlpha = opacity;
+        ctx.filter = blur > 0.5 ? `blur(${blur.toFixed(1)}px)` : 'none';
+        ctx.fillStyle = '#ffffff';
 
         ctx.beginPath();
-        ctx.arc(sx, sy, Math.max(rX, rY), 0, Math.PI * 2);
-        ctx.fillStyle = grad;
+        ctx.ellipse(screenX, screenY, w / 2, h / 2, 0, 0, Math.PI * 2);
         ctx.fill();
+
         ctx.restore();
       });
 
@@ -135,7 +116,7 @@ const Loading = ({ isComplete, onComplete }) => {
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
-  // ── Completion / fade-out logic ──────────────────────────────
+  // ── Completion / fade-out logic (2400 ms timer) ─────────────
   useEffect(() => {
     if (isComplete) return undefined;
 
@@ -172,12 +153,15 @@ const Loading = ({ isComplete, onComplete }) => {
       role="status"
       aria-label="Loading"
     >
+      {/* 3-D tilted ring of foreshortened orbs */}
       <canvas
         ref={canvasRef}
         id="loader-canvas"
         className="loader-canvas"
         aria-hidden="true"
       />
+
+      {/* "Loading..." — Libre Baskerville Italic per Figma */}
       <p className="loader-text">Loading...</p>
     </div>
   );
