@@ -123,7 +123,7 @@ const Projects = () => {
   const getCardClass = (index) => {
     const total = projectsData.length;
     let diff = index - activeIndex;
-    
+
     // Circular index calculation to ensure cards loop infinitely
     // keeping items balanced on both left and right sides
     const half = Math.floor(total / 2);
