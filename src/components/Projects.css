@@ -581,7 +581,8 @@
      opacity-only fade so the browser compositor handles everything.
   ────────────────────────────────────────────────────────────────── */
   .projects-slider-container {
-    height: 400px !important;
+    height: auto !important;
+    min-height: 380px;
     perspective: none !important;
     perspective-origin: unset;
     margin: 0.75rem 0 1rem;
@@ -591,7 +592,7 @@
   .projects-slider-track {
     transform-style: flat !important;
     will-change: auto;
-    height: 100% !important;
+    height: auto !important;
   }
 
   /* All cards: hidden, flat, no 3D */
@@ -617,6 +618,7 @@
 
   /* Only active card is shown and takes normal layout space */
   .slider-card.active {
+    position: relative !important;
     opacity: 1;
     pointer-events: auto;
     transform: scale(1) translateX(0) !important;
