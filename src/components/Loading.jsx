@@ -51,6 +51,38 @@ const Loading = ({ isComplete, onComplete }) => {
     const cosTilt = Math.cos(TILT);
     const sinTilt = Math.sin(TILT);
 
+    // ── Pre-render blurred circular sprites ──────────────────
+    const BLUR_STEPS = 16;
+    const MAX_BLUR = 22;
+    const sprites = [];
+    const R = ORB_WIDTH / 2;
+
+    for (let i = 0; i < BLUR_STEPS; i++) {
+      const b = (i / (BLUR_STEPS - 1)) * MAX_BLUR;
+      const margin = Math.ceil(b * 3);
+      const size = ORB_WIDTH + margin * 2;
+
+      const offscreen = document.createElement('canvas');
+      offscreen.width = size * DPR;
+      offscreen.height = size * DPR;
+      const oCtx = offscreen.getContext('2d');
+
+      if (oCtx) {
+        oCtx.scale(DPR, DPR);
+        oCtx.filter = b > 0.5 ? `blur(${b.toFixed(1)}px)` : 'none';
+        oCtx.fillStyle = '#ffffff';
+        oCtx.beginPath();
+        oCtx.arc(size / 2, size / 2, R, 0, Math.PI * 2);
+        oCtx.fill();
+      }
+
+      sprites.push({
+        canvas: offscreen,
+        size,
+        blur: b
+      });
+    }
+
     const render = () => {
       ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
 
@@ -96,15 +128,24 @@ const Loading = ({ isComplete, onComplete }) => {
       orbs.sort((a, b) => a.depth - b.depth);
 
       orbs.forEach(({ screenX, screenY, w, h, blur, opacity }) => {
+        // Find closest pre-rendered sprite
+        const spriteIndex = Math.min(
+          BLUR_STEPS - 1,
+          Math.max(0, Math.round((blur / MAX_BLUR) * (BLUR_STEPS - 1)))
+        );
+        const sprite = sprites[spriteIndex];
+
+        // Scale factor relative to the base sprite diameter (ORB_WIDTH / ORB_HEIGHT)
+        const destW = sprite.size * (w / ORB_WIDTH);
+        const destH = sprite.size * (h / ORB_HEIGHT);
+
         ctx.save();
         ctx.globalAlpha = opacity;
-        ctx.filter = blur > 0.5 ? `blur(${blur.toFixed(1)}px)` : 'none';
-        ctx.fillStyle = '#ffffff';
-
-        ctx.beginPath();
-        ctx.ellipse(screenX, screenY, w / 2, h / 2, 0, 0, Math.PI * 2);
-        ctx.fill();
-
+        ctx.drawImage(
+          sprite.canvas,
+          0, 0, sprite.size * DPR, sprite.size * DPR,
+          screenX - destW / 2, screenY - destH / 2, destW, destH
+        );
         ctx.restore();
       });
 
