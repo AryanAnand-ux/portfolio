@@ -54,8 +54,8 @@ body {
 /* Scroll reveal utility */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .reveal.active {
@@ -199,6 +199,11 @@ textarea {
     --shadow-md: 6px 6px 0px var(--border-color);
   }
 
+  body {
+    /* Smaller tile = fewer dots = faster repaint on scroll */
+    background-size: 28px 28px;
+  }
+
   .section {
     padding: 2.5rem 0;
     scroll-margin-top: 5rem;
@@ -218,6 +223,22 @@ textarea {
   :root {
     --shadow-sm: 3px 3px 0px var(--border-color);
     --shadow-md: 5px 5px 0px var(--border-color);
+  }
+
+  body {
+    /* Disable dot grid on small phones — saves paint on every scroll */
+    background-image: none;
+  }
+
+  /* Compositor-only reveal on mobile (no translateY = no layout work) */
+  .reveal {
+    transform: none;
+    transition: opacity 0.45s ease;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: none;
   }
 
   .section {
@@ -294,6 +315,31 @@ textarea {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* GPU layer promotion for heavy animated elements */
+.loading-overlay,
+.loader-canvas,
+.marquee-track,
+.projects-slider-track {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Reduce dot-grid paint cost on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    background-size: 28px 28px;
+  }
+
+  /* Disable hover-only transforms on touch — they stay in triggered state */
+  .brut-btn:hover,
+  .project-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
   }
 }
 
