@@ -11,6 +11,7 @@ import BeyondCode from './components/BeyondCode';
 import MarqueeStrip from './components/MarqueeStrip';
 import Footer from './components/Footer';
 import Loading from './components/Loading';
+import { SmoothCursor } from './components/ui/smooth-cursor';
 
 const ScrollProgressBar = () => {
   const progressBarRef = useRef(null);
@@ -93,6 +94,7 @@ function App() {
   return (
     <>
       <Loading isComplete={!isLoading} onComplete={() => setIsLoading(false)} />
+      <SmoothCursor />
       <style>{`
         html {
           scroll-padding-top: 80px;
