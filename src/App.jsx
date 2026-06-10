@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/Navbar';
@@ -11,6 +11,53 @@ import BeyondCode from './components/BeyondCode';
 import MarqueeStrip from './components/MarqueeStrip';
 import Footer from './components/Footer';
 import Loading from './components/Loading';
+
+const ScrollProgressBar = () => {
+  const progressBarRef = useRef(null);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const progressBar = progressBarRef.current;
+          if (progressBar) {
+            const scrollPosition = window.scrollY;
+            const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+            let progress = 0;
+            if (totalScroll > 0) {
+              if (totalScroll - scrollPosition <= 2) {
+                progress = 100;
+              } else {
+                progress = (scrollPosition / totalScroll) * 100;
+              }
+            }
+            progressBar.style.width = `${progress}%`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initialize position
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={progressBarRef}
+      className="scroll-progress-bar"
+      aria-hidden="true"
+    />
+  );
+};
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +108,7 @@ function App() {
           }
         }
       `}</style>
+      <ScrollProgressBar />
       <Navbar />
       <main id="main-content">
         <Hero />

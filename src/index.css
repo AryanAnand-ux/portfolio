@@ -372,3 +372,23 @@ noscript ~ #root .reveal {
   display: inline-block;
   box-shadow: 2px 2px 0px var(--border-color);
 }
+
+/* ---- Scroll Progress Bar ---- */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 5px;
+  background: linear-gradient(
+    to right,
+    var(--accent-purple),
+    var(--accent-pink),
+    var(--accent-blue)
+  );
+  border-bottom: 2px solid var(--border-color);
+  z-index: 10001; /* Ensure it stays above the navbar (z-index 1000) */
+  transition: width 0.08s linear;
+  will-change: width;
+}
+
