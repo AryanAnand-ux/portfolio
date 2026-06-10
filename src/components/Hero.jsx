@@ -21,7 +21,7 @@ const Hero = () => (
 
           <div className="profile-meta">
             <div><span className="meta-key key-location">[LOCATION]</span><span> Bhopal, MP</span></div>
-            <div><span className="meta-key key-status">[STATUS]</span><span> 2ND YEAR BTECH STUDENT</span></div>
+            <div><span className="meta-key key-status">[STATUS]</span><span> 3RD YEAR BTECH STUDENT</span></div>
             <div><span className="meta-key key-mission">[MISSION]</span><span> Code. Play. Chill.</span></div>
           </div>
 
@@ -44,7 +44,7 @@ const Hero = () => (
           <div className="hero-cta-card reveal">
             <h1 className="hero-title">Hi people!</h1>
             <p className="hero-lead">
-              I am a <span className="hero-highlight">2nd-year student at JUET, Guna</span>, pursuing Bachelor of Technology in Computer Science and Engineering.
+              I am a <span className="hero-highlight">Pre-final year student at JUET, Guna</span>, pursuing Bachelor of Technology in Computer Science and Engineering.
             </p>
             <p className="hero-lead hero-lead-secondary">
               I have strong aptitude, technical, and communication skills, and a logical approach to problem-solving.

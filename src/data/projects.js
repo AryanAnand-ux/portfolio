@@ -1,5 +1,15 @@
 export const projectsData = [
   {
+    id: 'juet-nexus',
+    title: 'JUET Nexus',
+    description: 'JUET Nexus is a modern student dashboard proxy for the JUET ERP system.',
+    tech: ['TypeScript', 'Next.js', 'Fastify', 'Redis'],
+    projectLink: 'https://github.com/AryanAnand-ux/JUET-Nexus.git',
+    link: null,
+    github: 'https://github.com/AryanAnand-ux/JUET-Nexus.git',
+    layoutClass: 'bento-third',
+  },
+  {
     id: 'loom2',
     title: 'Loom2',
     description: 'Loom is a full-stack web app that helps you manage your wardrobe digitally. Take a photo of any clothing item, and Loom\'s AI will automatically classify it by type, color, formality, and season. When you need outfit help, the built-in Stylist AI picks a cohesive look from your closet based on the weather and occasion.',
@@ -39,5 +49,5 @@ export const projectsData = [
     github: 'https://github.com/AryanAnand-ux/Global-Cybersecurity-Breach-Analytics-PowerBI.git',
     layoutClass: 'bento-third',
   },
-  
+
 ];
