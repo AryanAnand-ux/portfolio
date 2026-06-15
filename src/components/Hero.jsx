@@ -15,7 +15,7 @@ const Hero = () => (
             <img src="/avatar.png" alt="Aryan Anand - Avatar" className="hero-avatar" width="300" height="300" fetchpriority="high" />
           </div>
           <h3 className="profile-name">ARYAN ANAND</h3>
-          <div className="profile-subtitle">AI Engineer & FULL_STACK_DEVELOPER()</div>
+          <div className="profile-subtitle">AI & ML Enthusiast & Web Developer()</div>
 
           <hr className="profile-divider" />
 
