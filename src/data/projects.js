@@ -4,7 +4,7 @@ export const projectsData = [
     title: 'JUET Nexus',
     description: 'JUET Nexus is a modern student dashboard proxy for the JUET ERP system.',
     tech: ['TypeScript', 'Next.js', 'Fastify', 'Redis'],
-    projectLink: 'https://github.com/AryanAnand-ux/JUET-Nexus.git',
+    projectLink: 'https://juet-nexus-frontend.vercel.app/',
     link: null,
     github: 'https://github.com/AryanAnand-ux/JUET-Nexus.git',
     layoutClass: 'bento-third',
