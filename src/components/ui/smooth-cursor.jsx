@@ -69,6 +69,60 @@ const DefaultCursorSVG = () => {
   );
 };
 
+const DiamondCursorSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={42}
+      height={42}
+      viewBox="0 0 42 42"
+      fill="none"
+      style={{ filter: "drop-shadow(3px 3px 0px #111)" }}
+    >
+      {/* Outer Diamond */}
+      <polygon
+        points="21,3 39,21 21,39 3,21"
+        fill="#ffd166"
+        stroke="#111"
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+      {/* Inner Accent Diamond */}
+      <polygon
+        points="21,11 31,21 21,31 11,21"
+        fill="#ff9f1c"
+        stroke="#111"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      {/* Center Precision Target Dot */}
+      <circle cx="21" cy="21" r="2.5" fill="#111" />
+    </svg>
+  );
+};
+
+const HandCursorSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={30}
+      height={33}
+      viewBox="0 0 24 24"
+      fill="none"
+      style={{ filter: "drop-shadow(2.5px 2.5px 0px #111)" }}
+    >
+      <path
+        d="M10 11V3a1.5 1.5 0 0 1 3 0v7M13 8.5a1.5 1.5 0 0 1 3 0V11M16 10a1.5 1.5 0 0 1 3 0v1.5M10 9a1.5 1.5 0 0 0-3 0v5.5l-2.1-2.1a1.5 1.5 0 0 0-2.12 2.12l4.9 4.9A6.5 6.5 0 0 0 12.3 22H15a6.5 6.5 0 0 0 6.5-6.5V11"
+        fill="#a3def0"
+        stroke="#111"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
 export function SmoothCursor({
   cursor = <DefaultCursorSVG />,
   springConfig = {
@@ -85,6 +139,9 @@ export function SmoothCursor({
   const accumulatedRotation = useRef(0);
   const [isEnabled, setIsEnabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isCanvasHovered, setIsCanvasHovered] = useState(false);
+  const [isClickableHovered, setIsClickableHovered] = useState(false);
+
   const cursorX = useSpring(0, springConfig);
   const cursorY = useSpring(0, springConfig);
   const rotation = useSpring(0, {
@@ -108,9 +165,19 @@ export function SmoothCursor({
       }
     };
     updateEnabled();
-    mediaQuery.addEventListener("change", updateEnabled);
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", updateEnabled);
+    } else {
+      mediaQuery.addListener(updateEnabled);
+    }
+
     return () => {
-      mediaQuery.removeEventListener("change", updateEnabled);
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", updateEnabled);
+      } else {
+        mediaQuery.removeListener(updateEnabled);
+      }
     };
   }, []);
 
@@ -119,6 +186,7 @@ export function SmoothCursor({
       return;
     }
     let timeout = null;
+
     const updateVelocity = (currentPos) => {
       const currentTime = Date.now();
       const deltaTime = currentTime - lastUpdateTime.current;
@@ -131,18 +199,48 @@ export function SmoothCursor({
       lastUpdateTime.current = currentTime;
       lastMousePos.current = currentPos;
     };
+
     const smoothPointerMove = (e) => {
       if (!isTrackablePointer(e.pointerType)) {
         return;
       }
       setIsVisible(true);
+
+      const target = e.target;
+
+      // 1. Check if hovering over canvas / doodle element
+      const onCanvas = !!(
+        target &&
+        (target.tagName === "CANVAS" ||
+          (target.closest &&
+            target.closest("canvas, .draw-canvas, .draw-wrapper, .loading-canvas")))
+      );
+      setIsCanvasHovered(onCanvas);
+
+      // 2. Check if hovering over clickable buttons or links
+      const isClickable = !!(
+        !onCanvas &&
+        target &&
+        (target.tagName === "BUTTON" ||
+          target.tagName === "A" ||
+          target.getAttribute?.("role") === "button" ||
+          (target.closest &&
+            target.closest(
+              "button, a, [role='button'], .brut-btn, .nav-link, .pill, .indicator-dot, .tool-btn, .control-btn, input[type='button'], input[type='submit']"
+            )) ||
+          window.getComputedStyle(target).cursor === "pointer")
+      );
+      setIsClickableHovered(isClickable);
+
       const currentPos = { x: e.clientX, y: e.clientY };
       updateVelocity(currentPos);
       const speed = Math.sqrt(
         Math.pow(velocity.current.x, 2) + Math.pow(velocity.current.y, 2)
       );
+
       cursorX.set(currentPos.x);
       cursorY.set(currentPos.y);
+
       if (speed > 0.1) {
         const currentAngle =
           Math.atan2(velocity.current.y, velocity.current.x) * (180 / Math.PI) +
@@ -153,6 +251,7 @@ export function SmoothCursor({
         accumulatedRotation.current += angleDiff;
         rotation.set(accumulatedRotation.current);
         previousAngle.current = currentAngle;
+
         scale.set(0.95);
         if (timeout !== null) {
           clearTimeout(timeout);
@@ -162,6 +261,7 @@ export function SmoothCursor({
         }, 150);
       }
     };
+
     let rafId = 0;
     const throttledPointerMove = (e) => {
       if (!isTrackablePointer(e.pointerType)) {
@@ -173,12 +273,20 @@ export function SmoothCursor({
         rafId = 0;
       });
     };
+
+    const handleMouseLeave = () => {
+      setIsVisible(false);
+    };
+
     document.body.style.cursor = "none";
     window.addEventListener("pointermove", throttledPointerMove, {
       passive: true,
     });
+    document.addEventListener("mouseleave", handleMouseLeave);
+
     return () => {
       window.removeEventListener("pointermove", throttledPointerMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
       document.body.style.cursor = "auto";
       if (rafId) cancelAnimationFrame(rafId);
       if (timeout !== null) {
@@ -212,7 +320,13 @@ export function SmoothCursor({
         duration: 0.15,
       }}
     >
-      {cursor}
+      {isCanvasHovered ? (
+        <DiamondCursorSVG />
+      ) : isClickableHovered ? (
+        <HandCursorSVG />
+      ) : (
+        cursor
+      )}
     </motion.div>
   );
 }

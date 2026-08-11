@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Certificates — Add / Preview</title>
+    <style>
+      body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;padding:2rem}
+      .controls{display:flex;gap:1rem;align-items:center;margin-bottom:1rem}
+      .preview{width:100%;height:80vh;border:1px solid #ddd}
+      .note{color:#666;margin-top:0.5rem}
+      button{padding:0.5rem 0.75rem;border-radius:6px;border:1px solid #ccc;background:#f3f4f6}
+    </style>
+  </head>
+  <body>
+    <h1>Add / Preview Certificate PDF</h1>
+    <div class="controls">
+      <input id="file" type="file" accept="application/pdf" />
+      <button id="save">Save to browser</button>
+      <button id="clear">Clear</button>
+      <a id="download" href="#" download="certificate.pdf" style="display:none">Download</a>
+    </div>
+    <div class="note">Files are stored in your browser's localStorage (for demo). Use the download button to save a copy.</div>
+    <div id="previewWrap">
+      <iframe id="preview" class="preview" src="" aria-label="PDF preview"></iframe>
+    </div>
+
+    <script>
+      const input = document.getElementById('file');
+      const preview = document.getElementById('preview');
+      const saveBtn = document.getElementById('save');
+      const clearBtn = document.getElementById('clear');
+      const download = document.getElementById('download');
+
+      function loadSaved(){
+        const b64 = localStorage.getItem('userCertificate');
+        if(b64){
+          preview.src = 'data:application/pdf;base64,' + b64;
+          download.href = preview.src;
+          download.style.display = 'inline-block';
+        }
+      }
+
+      input.addEventListener('change', (e)=>{
+        const file = e.target.files && e.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = ()=>{
+          const b64 = reader.result.split(',')[1];
+          preview.src = 'data:application/pdf;base64,' + b64;
+          download.href = preview.src;
+          download.style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+      });
+
+      saveBtn.addEventListener('click', ()=>{
+        // If preview has a src, store the base64 (may be large)
+        if(!preview.src) return alert('Choose a PDF first');
+        const b64 = preview.src.split(',')[1];
+        try{
+          localStorage.setItem('userCertificate', b64);
+          alert('Saved in browser storage. Close and re-open this page to verify.');
+        }catch(err){
+          alert('Save failed: ' + err.message);
+        }
+      });
+
+      clearBtn.addEventListener('click', ()=>{
+        localStorage.removeItem('userCertificate');
+        preview.src = '';
+        download.style.display = 'none';
+        alert('Cleared');
+      });
+
+      // initialize
+      loadSaved();
+    </script>
+  </body>
+</html>

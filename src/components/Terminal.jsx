@@ -6,8 +6,8 @@ import { arsenalData } from '../data/skills';
 const PROMPT = 'guest@aryan:~$ ';
 
 const initialLines = [
-  'AryanOS v1.0.0 (tty1)',
-  'Type "help" to see available commands.',
+  'AryanOS v2.0.0 (tty1)',
+  'Type "help" to see commands for resume, projects, and experience.',
 ];
 
 const Terminal = () => {
@@ -92,7 +92,7 @@ const Terminal = () => {
 
     if (cmd === 'help') {
       writeLines(
-        'Available commands: whoami, skills, projects, contact, resume, clear, sudo',
+        'Available commands: whoami, skills, projects, experience, contact, resume, clear, sudo',
         'Fun commands: game, guess, rps'
       );
       return;
@@ -100,7 +100,8 @@ const Terminal = () => {
 
     if (cmd === 'whoami') {
       writeLines(
-        'Aryan Anand | 2nd Year B.Tech CSE @ JUET Guna',
+        'Aryan Anand | 3rd Year B.Tech CSE @ JUET Guna',
+        'Location: Bhopal, MP',
         'Status: AI Engineer & Full Stack Developer',
         'Email: aryan.anand1806@gmail.com'
       );
@@ -117,6 +118,14 @@ const Terminal = () => {
       return;
     }
 
+    if (cmd === 'experience') {
+      writeLines(
+        '1. AI/ML Intern @ IOCL Mathura (June 2026 - July 2026)',
+        '2. Power BI Intern @ Microsoft Elevate AICTE Program (Feb 2026 - Mar 2026)'
+      );
+      return;
+    }
+
     if (cmd === 'contact') {
       writeLines(
         'Email: aryan.anand1806@gmail.com',
@@ -127,7 +136,7 @@ const Terminal = () => {
     }
 
     if (cmd === 'resume') {
-      writeLines('Resume: /resume.pdf');
+      writeLines('Resume: /Resume_5th_sem.pdf');
       return;
     }
 

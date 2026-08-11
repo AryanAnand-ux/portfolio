@@ -38,6 +38,7 @@ const Education = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     const resize = () => {
       const parent = canvas.parentElement;
@@ -60,6 +61,7 @@ const Education = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     const getPos = (e) => {
       const rect = canvas.getBoundingClientRect();
@@ -99,7 +101,10 @@ const Education = () => {
     const pointerUp = (e) => {
       drawing.current = false;
       ctx.closePath();
-      canvas.releasePointerCapture?.(e.pointerId);
+      // Safe release — avoid DOMException if pointer capture was already released
+      if (canvas.hasPointerCapture?.(e.pointerId)) {
+        canvas.releasePointerCapture(e.pointerId);
+      }
     };
 
     canvas.addEventListener('pointerdown', pointerDown);
@@ -119,12 +124,25 @@ const Education = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     const rect = canvas.getBoundingClientRect();
     const scale = window.devicePixelRatio || 1;
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
     ctx.clearRect(0, 0, rect.width, rect.height);
     fillBoard(ctx, rect.width, rect.height);
     setHasDrawn(false);
+  };
+
+  const saveCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const imageURI = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.download = 'my-doodle.png';
+    link.href = imageURI;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -141,26 +159,13 @@ const Education = () => {
             <div className="edu-left">
               <div className="edu-card brut-box-small">
                 <div className="edu-badge">2024-2028</div>
-                <h3>B.Tech CSE</h3>
+                <h3>B.Tech CSE-AIML</h3>
                 <small>Jaypee University Of Engineering And Technology, Guna</small>
+                <div className="edu-meta">GPA: 8.57</div>
                 <ul>
-                  <li>Relevant Coursework: DSA, OOP, DBMS</li>
-                  <li>Focus: Full Stack Development & AI</li>
+                  <li>Relevant Coursework: Advanced Programming, DSA, AI, ML, Networking, Databases</li>
+                  <li>Focus: Full Stack Development & AI/ML</li>
                 </ul>
-              </div>
-
-              <div className="edu-card brut-box-small">
-                <div className="edu-badge">XII</div>
-                <h3>Senior Secondary</h3>
-                <small>St. Atulanand Residential Academy, Varanasi</small>
-                <div className="edu-meta">CBSE Board | Percentage: 86.6%</div>
-              </div>
-
-              <div className="edu-card brut-box-small">
-                <div className="edu-badge">X</div>
-                <h3>Secondary Education</h3>
-                <small>HARMONY INTNL SCHL CHAURASIA MOHANIA KAIMUR BR</small>
-                <div className="edu-meta">CBSE Board | Percentage: 79.4%</div>
               </div>
             </div>
 
@@ -170,6 +175,7 @@ const Education = () => {
                 <button type="button" className={`tool-btn ${tool === 'marker' ? 'active' : ''}`} aria-pressed={tool === 'marker'} onClick={selectMarker}>Marker</button>
                 <button type="button" className={`tool-btn ${tool === 'erase' ? 'active' : ''}`} aria-pressed={tool === 'erase'} onClick={selectErase}>Erase</button>
                 <button type="button" className="tool-btn" onClick={clearCanvas}>Clear</button>
+                <button type="button" className="tool-btn save-btn" onClick={saveCanvas}>Save</button>
               </div>
 
               <div className="draw-wrapper">

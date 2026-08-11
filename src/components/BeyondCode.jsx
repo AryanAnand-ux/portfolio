@@ -17,16 +17,34 @@ const BeyondCode = () => (
               <div className="activity-top">
                 <div>
                   <div className="activity-title-row">
-                    <span className="activity-icon" aria-hidden="true">ISF</span>
-                    <h3>Member @ ISF</h3>
+                    <span className="activity-icon" aria-hidden="true">LEAD</span>
+                    <h3>Community Lead @ Developer Student Clubs VR-AR-MR</h3>
                   </div>
-                  <span className="activity-date">2024 - Present</span>
+                  <span className="activity-date">Jun 2024 - Present</span>
                 </div>
-                <img src="/avatar.png" alt="Aryan Anand - ISF member activity" className="activity-avatar" width="80" height="80" />
+                <img src="/avatar.png" alt="Aryan Anand - community lead activity" className="activity-avatar" width="80" height="80" />
               </div>
               <div className="activity-body">
                 <p>
-                  Active in student-led technical initiatives, peer learning, and event coordination through the university community.
+                  Contributed to immersive club projects including VR Golf, AR Escape Room, and multiple AR shooters.
+                </p>
+              </div>
+            </article>
+
+            <article className="activity-card brut-box">
+              <div className="activity-top">
+                <div>
+                  <div className="activity-title-row">
+                    <span className="activity-icon" aria-hidden="true">LEAD</span>
+                    <h3>Community Lead @ DSC Rospinot & ISF Club</h3>
+                  </div>
+                  <span className="activity-date">Jun 2024 - Present</span>
+                </div>
+                <img src="/avatar.png" alt="Aryan Anand - community lead activity" className="activity-avatar" width="80" height="80" />
+              </div>
+              <div className="activity-body">
+                <p>
+                  Built hardware projects using EV3, Arduino, and Raspberry Pi, and hosted the CodeSrijan Hackathon.
                 </p>
               </div>
             </article>
@@ -37,6 +55,14 @@ const BeyondCode = () => (
             <article className="coding-card brut-box">
               <div className="coding-item">
                 <Trophy size={20} />
+                <div>
+                  <h4>Joint Secretary, IETE Student’s Forum</h4>
+                  <p>Organizing campus tech events and student initiatives.</p>
+                </div>
+              </div>
+
+              <div className="coding-item">
+                <Star size={20} />
                 <div>
                   <h4>Winner, Elite Hack 1.0</h4>
                   <p>Secured first place among 100+ teams with an innovative AI solution.</p>
@@ -56,6 +82,14 @@ const BeyondCode = () => (
                 <div>
                   <h4>Microsoft Elevate AICTE Alumnus</h4>
                   <p>Completed advanced training in cloud computing and AI technologies.</p>
+                </div>
+              </div>
+
+              <div className="coding-item">
+                <Star size={20} />
+                <div>
+                  <h4>Oracle Certified AI Foundations Associate</h4>
+                  <p>Completed Oracle's AI Foundations certification in 2025.</p>
                 </div>
               </div>
             </article>

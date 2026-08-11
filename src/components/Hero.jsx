@@ -26,10 +26,10 @@ const Hero = () => (
           </div>
 
           <div className="profile-actions">
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="brut-btn btn-download">
+            <a href="/Resume_5th_sem.pdf" target="_blank" rel="noopener noreferrer" className="brut-btn btn-download">
               <Download size={18} />&nbsp; RESUME
             </a>
-            <a href="mailto:aryan.anand1806@gmail.com" className="brut-btn btn-contact"><Mail size={18} /> CONTACT ME</a>
+            <a href="#contact" className="brut-btn btn-contact"><Mail size={18} /> CONTACT ME</a>
           </div>
 
           <div className="profile-socials">
@@ -44,10 +44,10 @@ const Hero = () => (
           <div className="hero-cta-card reveal">
             <h1 className="hero-title">Hi people!</h1>
             <p className="hero-lead">
-              I am a <span className="hero-highlight">Pre-final year student at JUET, Guna</span>, pursuing Bachelor of Technology in Computer Science and Engineering.
+              I am a <span className="hero-highlight">B.Tech CSE-AIML student at JUET, Guna</span>, building full-stack and machine learning systems.
             </p>
             <p className="hero-lead hero-lead-secondary">
-              I have strong aptitude, technical, and communication skills, and a logical approach to problem-solving.
+              I focus on AI/ML, backend engineering, and applied problem-solving with strong communication and leadership.
             </p>
 
             <div className="hero-cta-actions">

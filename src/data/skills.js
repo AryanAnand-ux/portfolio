@@ -2,31 +2,31 @@ export const arsenalData = [
   {
     id: 'languages',
     title: 'Languages',
-    tags: ['Java', 'Python', 'JavaScript', 'C'],
+    tags: ['Python', 'C++', 'C', 'SQL', 'Java'],
   },
   {
     id: 'frontend',
     title: 'Frontend',
-    tags: ['React.js', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite'],
+    tags: ['React', 'HTML5', 'CSS3', 'Vite'],
   },
   {
     id: 'backend',
     title: 'Backend',
-    tags: ['Node.js', 'Express.js', 'REST APIs'],
+    tags: ['FastAPI', 'Node.js', 'Express.js', 'REST APIs'],
   },
   {
     id: 'databases',
     title: 'Databases',
-    tags: ['MongoDB', 'SQL'],
+    tags: ['SQLite', 'PostgreSQL', 'MySQL', 'MongoDB', 'SQL'],
   },
   {
     id: 'corecs',
     title: 'Core CS',
-    tags: ['DSA', 'OOP'],
+    tags: ['DSA', 'Algorithms', 'AI', 'ML', 'Networking'],
   },
   {
     id: 'tools',
     title: 'Tools & Cloud',
-    tags: ['Git', 'GitHub'],
+    tags: ['Docker', 'Git', 'Linux', 'Power BI', 'AWS'],
   },
 ];

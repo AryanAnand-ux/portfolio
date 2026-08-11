@@ -12,8 +12,8 @@ describe('Terminal', () => {
     render(<Terminal />);
     const input = screen.getByLabelText('Terminal command input');
 
-    expect(screen.getByText('AryanOS v1.0.0 (tty1)')).toBeInTheDocument();
-    expect(screen.getByText('Type "help" to see available commands.')).toBeInTheDocument();
+    expect(screen.getByText('AryanOS v2.0.0 (tty1)')).toBeInTheDocument();
+    expect(screen.getByText('Type "help" to see commands for resume, projects, and experience.')).toBeInTheDocument();
 
     submitCommand(input, 'help');
     expect(screen.getByText(/Available commands:/)).toBeInTheDocument();

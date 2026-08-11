@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 import { projectsData } from '../data/projects';
 import './Projects.css';
 
-const Projects = () => {
+const Projects = ({ isDetailPage = false }) => {
   // Start from the middle index of the projects list
   const [activeIndex, setActiveIndex] = useState(Math.floor(projectsData.length / 2));
   const sliderRef = useRef(null);
@@ -57,9 +58,8 @@ const Projects = () => {
     isDown.current = false;
   };
 
-  // Mouse drag handlers for desktop swipe
   const handleMouseDown = (e) => {
-    if (e.button !== 0) return; // Left click only
+    if (e.button !== 0) return;
     startX.current = e.clientX;
     isDown.current = true;
   };
@@ -68,14 +68,9 @@ const Projects = () => {
     if (!isDown.current) return;
     const currentX = e.clientX;
     const diff = startX.current - currentX;
-    const threshold = 100; // Drag distance threshold to slide card
+    const threshold = 100;
     if (Math.abs(diff) > threshold) {
-      if (diff > 0) {
-        handleNext();
-      } else {
-        handlePrev();
-      }
-      // Update startX to the current position to allow smooth continuous dragging
+      if (diff > 0) handleNext(); else handlePrev();
       startX.current = currentX;
     }
   };
@@ -84,6 +79,13 @@ const Projects = () => {
     isDown.current = false;
   };
 
+  // Release drag state when mouse leaves window to prevent stuck-drag bug
+  useEffect(() => {
+    const onWindowMouseUp = () => { isDown.current = false; };
+    window.addEventListener('mouseup', onWindowMouseUp);
+    return () => window.removeEventListener('mouseup', onWindowMouseUp);
+  }, []);
+
   // Hook for mouse wheel scroll navigation
   useEffect(() => {
     const slider = sliderRef.current;
@@ -91,17 +93,14 @@ const Projects = () => {
 
     const handleWheelEvent = (e) => {
       const now = Date.now();
-      // Rate-limit wheel triggers to 400ms for smooth transitions
       if (now - lastScrollTime.current < 400) return;
 
-      if (Math.abs(e.deltaY) > 15 || Math.abs(e.deltaX) > 15) {
+      // Only intercept horizontal scroll intent to avoid trapping page scroll
+      const absX = Math.abs(e.deltaX);
+      const absY = Math.abs(e.deltaY);
+      if (absX > absY && absX > 15) {
         e.preventDefault();
-        const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-        if (delta > 0) {
-          handleNext();
-        } else {
-          handlePrev();
-        }
+        if (e.deltaX > 0) handleNext(); else handlePrev();
         lastScrollTime.current = now;
       }
     };
@@ -122,10 +121,10 @@ const Projects = () => {
 
   const getCardClass = (index) => {
     const total = projectsData.length;
+    // Guard: prevent infinite loop on empty data array
+    if (total === 0) return 'slider-card';
     let diff = index - activeIndex;
 
-    // Circular index calculation to ensure cards loop infinitely
-    // keeping items balanced on both left and right sides
     const half = Math.floor(total / 2);
     while (diff > half) diff -= total;
     while (diff < -half) diff += total;
@@ -214,6 +213,14 @@ const Projects = () => {
               <ChevronRight size={20} />
             </button>
           </div>
+
+          {!isDetailPage && (
+            <div className="view-all-container">
+              <Link to="/projects" className="brut-btn view-all-btn">
+                View All Projects
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -1,10 +1,16 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import { describe, it, expect } from 'vitest';
 import Projects from './Projects';
+import { projectsData } from '../data/projects';
 
 describe('Projects Slider Component', () => {
   it('renders the projects section with header and slider track', () => {
-    render(<Projects />);
+    render(
+      <BrowserRouter>
+        <Projects />
+      </BrowserRouter>
+    );
     
     // Check header elements
     expect(screen.getByRole('heading', { name: /Projects/i })).toBeInTheDocument();
@@ -20,26 +26,35 @@ describe('Projects Slider Component', () => {
   });
 
   it('initially makes the middle project active and updates classes on navigation click', () => {
-    const { container } = render(<Projects />);
+    const { container } = render(
+      <BrowserRouter>
+        <Projects />
+      </BrowserRouter>
+    );
     
-    // Find all cards by matching the class
+    const mid = Math.floor(projectsData.length / 2);
     const cards = container.querySelectorAll('.slider-card');
-    // Middle card (index 2) is active initially
-    expect(cards[2].className).toContain('active');
-    expect(cards[3].className).toContain('right-1');
-    expect(cards[1].className).toContain('left-1');
+    // Middle card is active initially
+    expect(cards[mid].className).toContain('active');
+    expect(cards[mid + 1].className).toContain('right-1');
+    expect(cards[mid - 1].className).toContain('left-1');
     
     // Click Next button
     const nextBtn = screen.getByRole('button', { name: /Next project/i });
     fireEvent.click(nextBtn);
     
-    // The fourth card (index 3) should now be active
-    expect(cards[2].className).toContain('left-1');
-    expect(cards[3].className).toContain('active');
+    // The next card should now be active
+    const nextMid = (mid + 1) % projectsData.length;
+    expect(cards[mid].className).toContain('left-1');
+    expect(cards[nextMid].className).toContain('active');
   });
 
   it('updates the active slide when clicking an indicator dot', () => {
-    const { container } = render(<Projects />);
+    const { container } = render(
+      <BrowserRouter>
+        <Projects />
+      </BrowserRouter>
+    );
     const cards = container.querySelectorAll('.slider-card');
     
     // Click the first indicator (index 0)
@@ -51,7 +66,11 @@ describe('Projects Slider Component', () => {
   });
 
   it('updates the active slide when clicking a non-active background card', () => {
-    const { container } = render(<Projects />);
+    const { container } = render(
+      <BrowserRouter>
+        <Projects />
+      </BrowserRouter>
+    );
     const cards = container.querySelectorAll('.slider-card');
     
     // The second card (index 1) is left-1 (not active). Let's click it.
@@ -62,21 +81,26 @@ describe('Projects Slider Component', () => {
   });
 
   it('supports keyboard ArrowLeft and ArrowRight navigation when slider is focused', () => {
-    const { container } = render(<Projects />);
+    const { container } = render(
+      <BrowserRouter>
+        <Projects />
+      </BrowserRouter>
+    );
+    const mid = Math.floor(projectsData.length / 2);
     const cards = container.querySelectorAll('.slider-card');
     const sliderContainer = screen.getByLabelText('Projects slider');
-    
-    // Focus slider and press ArrowRight (from active index 2)
+
+    // Focus slider and press ArrowRight (from active index mid)
     sliderContainer.focus();
     fireEvent.keyDown(sliderContainer, { key: 'ArrowRight', code: 'ArrowRight' });
-    
-    // Third card (index 3) should be active
-    expect(cards[3].className).toContain('active');
-    
+
+    // Next card should be active
+    expect(cards[mid + 1].className).toContain('active');
+
     // Press ArrowLeft
     fireEvent.keyDown(sliderContainer, { key: 'ArrowLeft', code: 'ArrowLeft' });
-    
-    // Middle card (index 2) should be active again
-    expect(cards[2].className).toContain('active');
+
+    // Middle card should be active again
+    expect(cards[mid].className).toContain('active');
   });
 });

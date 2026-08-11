@@ -1,0 +1,25 @@
+/* Palette-driven border and shadow via CSS custom property set inline */
+.cert-detail-card {
+  border: var(--border-width) solid #2a2a2a;
+  box-shadow: var(--shadow-md);
+}
+
+.cert-detail-card:hover {
+  box-shadow: 12px 12px 0px #2a2a2a;
+}
+
+@media (max-width: 768px) {
+  .cert-detail-card {
+    box-shadow: 6px 6px 0 #2a2a2a;
+  }
+
+  .cert-detail-card:hover {
+    box-shadow: 9px 9px 0 #2a2a2a;
+  }
+}
+
+@media (max-width: 480px) {
+  .cert-detail-card {
+    box-shadow: 4px 4px 0 #2a2a2a;
+  }
+}

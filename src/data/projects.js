@@ -1,8 +1,18 @@
 export const projectsData = [
   {
+    id: 'hy-kero-predictor',
+    title: 'HY Kero Flash Point Predictor',
+    description: 'Production-grade full-stack ML app built during IOCL internship. Predicts Heavy Kerosene flash point in real-time using 41 DCS sensor readings, replacing slow lab GC analysis. Features 95% confidence intervals, AI chatbot, batch CSV uploads, and Docker orchestration.',
+    tech: ['Python', 'FastAPI', 'React', 'Docker', 'Machine Learning', 'SQLite'],
+    projectLink: 'https://hy-kero-predictor.vercel.app/',
+    link: 'https://hy-kero-predictor.vercel.app/',
+    github: 'https://github.com/AryanAnand-ux/hy-kero-predictor.git',
+    layoutClass: 'bento-third',
+  },
+  {
     id: 'juet-nexus',
     title: 'JUET Nexus',
-    description: 'JUET Nexus is a modern student dashboard proxy for the JUET ERP system.',
+    description: 'Modern student dashboard proxy for the JUET ERP system designed to improve user experience and reduce data access latency.',
     tech: ['TypeScript', 'Next.js', 'Fastify', 'Redis'],
     projectLink: 'https://juet-nexus-frontend.vercel.app/',
     link: null,
@@ -12,8 +22,8 @@ export const projectsData = [
   {
     id: 'loom2',
     title: 'Loom2',
-    description: 'Loom is a full-stack web app that helps you manage your wardrobe digitally. Take a photo of any clothing item, and Loom\'s AI will automatically classify it by type, color, formality, and season. When you need outfit help, the built-in Stylist AI picks a cohesive look from your closet based on the weather and occasion.',
-    tech: ['Project', 'Development'],
+    description: 'AI-powered digital wardrobe web app that automatically classifies clothing items by type and color, and recommends weather-aware outfits via an integrated Stylist AI.',
+    tech: ['React', 'Node.js', 'AI APIs'],
     projectLink: 'https://loom2-one.vercel.app/',
     link: null,
     github: 'https://github.com/AryanAnand-ux/Loom2.git',
@@ -32,8 +42,8 @@ export const projectsData = [
   {
     id: 'file-converter',
     title: 'File Converter',
-    description: 'A file conversion utility for transforming common document and media formats with a simple, practical workflow.',
-    tech: ['JavaScript', 'Utilities', 'Conversion'],
+    description: 'A straightforward web-based file conversion utility for transforming common document and media formats.',
+    tech: ['JavaScript', 'Frontend Development'],
     projectLink: 'https://file-converter-opal.vercel.app/',
     link: null,
     github: 'https://github.com/AryanAnand-ux/file-converter.git',
@@ -42,7 +52,7 @@ export const projectsData = [
   {
     id: 'cybersecurity-breach-analytics',
     title: 'Global Cybersecurity Breach Analytics',
-    description: 'A Power BI analytics project focused on exploring global breach trends, attack vectors, and incident patterns.',
+    description: 'Comprehensive analytics dashboard to visualize historical global breach trends, attack vectors, and incident patterns.',
     tech: ['Power BI', 'Analytics', 'Cybersecurity'],
     projectLink: 'https://github.com/AryanAnand-ux/Global-Cybersecurity-Breach-Analytics-PowerBI.git',
     link: null,

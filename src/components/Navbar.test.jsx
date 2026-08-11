@@ -1,4 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 import Navbar from './Navbar';
 
@@ -38,7 +39,11 @@ describe('Navbar', () => {
   });
 
   it('marks a nav item active when section intersects', () => {
-    render(<Navbar />);
+    render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
 
     const projectsSection = document.getElementById('projects');
     act(() => {
@@ -50,7 +55,11 @@ describe('Navbar', () => {
   });
 
   it('opens mobile menu and closes it with Escape', () => {
-    render(<Navbar />);
+    render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
 
     const toggle = screen.getByLabelText('Toggle navigation menu');
     fireEvent.click(toggle);
@@ -65,7 +74,11 @@ describe('Navbar', () => {
   });
 
   it('applies scrolled class after passing scroll threshold', () => {
-    render(<Navbar />);
+    render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
 
     const nav = screen.getByRole('navigation');
 
