@@ -45,7 +45,10 @@ export default function Certificates({ isDetailPage = false }) {
                         className="pdf-thumb"
                         aria-label={`${c.title} preview`}
                       >
-                        <div className="thumb-empty" />
+                        <div className="pdf-fallback-badge">
+                          <span className="pdf-icon">📜</span>
+                          <span className="pdf-label">PDF Certificate</span>
+                        </div>
                       </object>
                     ) : (
                       <div className="thumb-empty" />

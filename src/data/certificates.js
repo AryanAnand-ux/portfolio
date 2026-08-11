@@ -13,7 +13,7 @@ export const certificatesData = [
     issuer: 'Microsoft Elevate AICTE Program',
     date: 'Feb 2026 - Mar 2026',
     thumbnail: '',
-    file: '/cert/microsoft elvate.pdf',
+    file: '/cert/microsoft_elevate.pdf',
   },
   {
     id: 'oracle-ai-foundations',
@@ -21,7 +21,7 @@ export const certificatesData = [
     issuer: 'Oracle',
     date: '2025',
     thumbnail: '',
-    file: '/cert/oracle AI cert.pdf',
+    file: '/cert/oracle_ai_cert.pdf',
   },
   {
     id: 'ai-for-beginners',
@@ -29,7 +29,7 @@ export const certificatesData = [
     issuer: 'Online Course',
     date: '2026',
     thumbnail: '',
-    file: '/cert/AI for Beginners.pdf',
+    file: '/cert/ai_for_beginners.pdf',
   },
   {
     id: 'hero-campus',
