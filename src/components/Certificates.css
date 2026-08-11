@@ -76,9 +76,14 @@
   margin-bottom: 0.5rem;
 }
 
-.cert-card img { width: 100%; height: 100%; object-fit: contain; }
-.cert-thumb .pdf-thumb { width: 100%; height: 100%; border: none; }
-.cert-thumb .pdf-thumb > .thumb-empty { display: none }
+.cert-thumb iframe.pdf-thumb {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+  overflow: hidden;
+  background: #fff;
+}
 
 .cert-card { border: 2px solid var(--border-color); }
 

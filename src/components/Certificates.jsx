@@ -39,17 +39,12 @@ export default function Certificates({ isDetailPage = false }) {
                     {c.thumbnail ? (
                       <img src={c.thumbnail} alt={`${c.title} thumbnail`} />
                     ) : c.file ? (
-                      <object
-                        data={c.file}
-                        type="application/pdf"
+                      <iframe
+                        src={`${c.file}#toolbar=0&navpanes=0&scrollbar=0`}
+                        title={`${c.title} preview`}
                         className="pdf-thumb"
-                        aria-label={`${c.title} preview`}
-                      >
-                        <div className="pdf-fallback-badge">
-                          <span className="pdf-icon">📜</span>
-                          <span className="pdf-label">PDF Certificate</span>
-                        </div>
-                      </object>
+                        loading="lazy"
+                      />
                     ) : (
                       <div className="thumb-empty" />
                     )}
