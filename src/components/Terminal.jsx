@@ -136,7 +136,7 @@ const Terminal = () => {
     }
 
     if (cmd === 'resume') {
-      writeLines('Resume: /Resume_5th_sem.pdf');
+      writeLines('Resume: /resume_5th_sem_v4.pdf');
       return;
     }
 

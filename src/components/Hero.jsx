@@ -26,7 +26,7 @@ const Hero = () => (
           </div>
 
           <div className="profile-actions">
-            <a href="/Resume_5th_sem.pdf" target="_blank" rel="noopener noreferrer" className="brut-btn btn-download">
+            <a href="/resume_5th_sem_v4.pdf" target="_blank" rel="noopener noreferrer" className="brut-btn btn-download">
               <Download size={18} />&nbsp; RESUME
             </a>
             <a href="#contact" className="brut-btn btn-contact"><Mail size={18} /> CONTACT ME</a>
