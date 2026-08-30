@@ -30,9 +30,11 @@ const Navbar = () => {
   }, [location.pathname]);
 
   // Close mobile menu on route change (fixes body overflow lock on browser back/forward)
-  useEffect(() => {
+  const [prevPath, setPrevPath] = useState(location.pathname);
+  if (prevPath !== location.pathname) {
+    setPrevPath(location.pathname);
     setIsMobileMenuOpen(false);
-  }, [location.pathname]);
+  }
 
   useEffect(() => {
     let ticking = false;

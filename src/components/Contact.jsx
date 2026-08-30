@@ -1,5 +1,6 @@
 import { Mail } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from './icons';
+import Shuffle from './Shuffle';
 import './Contact.css';
 
 const Contact = () => (
@@ -7,7 +8,7 @@ const Contact = () => (
     <div className="container center-wrap">
       <div className="section-header-wrap reveal contact-title-wrap">
         <h2 className="section-title contact-title">
-          Let&apos;s Talk
+          <Shuffle tag="span" text="Let's Talk" triggerOnHover={true} duration={2.5} />
         </h2>
       </div>
 

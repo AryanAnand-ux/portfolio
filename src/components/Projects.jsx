@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 import { projectsData } from '../data/projects';
+import Shuffle from './Shuffle';
 import './Projects.css';
 
 const Projects = ({ isDetailPage = false }) => {
@@ -145,7 +146,7 @@ const Projects = ({ isDetailPage = false }) => {
         <div className="projects-panel brut-box reveal">
           <div className="section-header-wrap projects-header">
             <h2 className="section-title projects-title">
-              Projects
+              <Shuffle tag="span" text="Projects" triggerOnHover={true} duration={2.5} />
             </h2>
             <p className="projects-subtitle">
               Building intelligent systems and robust architectures.

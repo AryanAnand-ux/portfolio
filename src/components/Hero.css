@@ -53,6 +53,12 @@
 }
 
 /* Profile card (left column) */
+.profile-card-tilted-wrapper {
+  max-width: 360px;
+  justify-self: center;
+  width: 100%;
+}
+
 .profile-card {
   background-color: #fff;
   border: var(--border-width) solid var(--border-color);

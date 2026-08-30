@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import Shuffle from './Shuffle';
 import './Education.css';
 
 const CANVAS_BG = '#272727';
@@ -151,7 +152,7 @@ const Education = () => {
         <div className="education-panel brut-box reveal">
           <div className="edu-header">
             <h2 className="section-title edu-title">
-              Education
+              <Shuffle tag="span" text="Education" triggerOnHover={true} duration={2.5} />
             </h2>
           </div>
 

@@ -1,4 +1,5 @@
 import { Star, Trophy } from 'lucide-react';
+import Shuffle from './Shuffle';
 import './BeyondCode.css';
 
 const BeyondCode = () => (
@@ -7,7 +8,7 @@ const BeyondCode = () => (
       <div className="beyond-panel brut-box reveal">
         <div className="beyond-header-wrap">
           <h2 className="section-title beyond-title">
-            Beyond Code
+            <Shuffle tag="span" text="Beyond Code" triggerOnHover={true} duration={2.5} />
           </h2>
         </div>
 

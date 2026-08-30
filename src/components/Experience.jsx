@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Shuffle from './Shuffle';
 import './Experience.css';
 
 const Experience = ({ isDetailPage = false }) => (
@@ -6,7 +7,9 @@ const Experience = ({ isDetailPage = false }) => (
     <div className="container">
       <div className="experience-panel brut-box reveal">
         <div className="section-header-wrap experience-header">
-          <h2 className="section-title experience-title">Experience</h2>
+          <h2 className="section-title experience-title">
+            <Shuffle tag="span" text="Experience" triggerOnHover={true} duration={2.5} />
+          </h2>
 
         </div>
 

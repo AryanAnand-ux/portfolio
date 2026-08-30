@@ -1,5 +1,6 @@
 
 import { arsenalData } from '../data/skills';
+import Shuffle from './Shuffle';
 import './Skills.css';
 
 const colorMap = {
@@ -19,7 +20,7 @@ const Skills = () => (
         <div className="skills-panel brut-box">
           <div className="skills-header">
             <h2 className="section-title skills-title">
-              Skills
+              <Shuffle tag="span" text="Skills" triggerOnHover={true} duration={2.5} />
             </h2>
           </div>
 

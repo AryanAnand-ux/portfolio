@@ -1,0 +1,13 @@
+.shuffle-text {
+  display: inline-block;
+  cursor: default;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+.shuffle-text.is-shuffling {
+  opacity: 0.85;
+}

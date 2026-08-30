@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Shuffle from './Shuffle';
 import './Certificates.css';
 import { certificatesData } from '../data/certificates';
 
@@ -17,7 +18,7 @@ export default function Certificates({ isDetailPage = false }) {
       <div className="container">
         <div className="certificates-panel brut-box">
           <div className="section-header-wrap">
-            <h2 className="section-title">Certifications</h2>
+            <h2 className="section-title"><Shuffle tag="span" text="Certifications" triggerOnHover={true} duration={2.5} /></h2>
             <p className="section-subtitle">Professional credentials and achievements</p>
           </div>
 
