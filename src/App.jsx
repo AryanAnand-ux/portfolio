@@ -14,7 +14,7 @@ import Experience from './components/Experience';
 import MarqueeStrip from './components/MarqueeStrip';
 import Footer from './components/Footer';
 import Loading from './components/Loading';
-import { SmoothCursor } from './components/ui/smooth-cursor';
+import Antigravity from './components/Antigravity';
 import ProjectsPage from './pages/ProjectsPage';
 import ExperiencePage from './pages/ExperiencePage';
 import CertificatesPage from './pages/CertificatesPage';
@@ -130,7 +130,23 @@ function App() {
       {isHomePage && (
         <Loading isComplete={!isLoading} onComplete={() => setIsLoading(false)} />
       )}
-      <SmoothCursor />
+      <Antigravity
+        count={350}
+        magnetRadius={6}
+        ringRadius={7}
+        waveSpeed={0.4}
+        waveAmplitude={1}
+        particleSize={0.8}
+        lerpSpeed={0.06}
+        color="#ff4d8d"
+        autoAnimate
+        particleVariance={1}
+        rotationSpeed={0}
+        depthFactor={1}
+        pulseSpeed={3}
+        particleShape="capsule"
+        fieldStrength={10}
+      />
       <style>{`
         html {
           scroll-padding-top: 80px;

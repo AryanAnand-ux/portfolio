@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Award, ExternalLink, FileText } from 'lucide-react';
 import Shuffle from './Shuffle';
 import './Certificates.css';
 import { certificatesData } from '../data/certificates';
@@ -36,20 +37,31 @@ export default function Certificates({ isDetailPage = false }) {
                     boxShadow: `10px 10px 0 ${palette.border}`,
                   }}
                 >
-                  <div className="cert-thumb" style={{ borderColor: palette.accent }}>
+                  <a
+                    href={c.file || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cert-thumb cert-thumb-link"
+                    style={{ borderColor: palette.accent }}
+                    aria-label={`Open ${c.title} certificate PDF`}
+                  >
                     {c.thumbnail ? (
                       <img src={c.thumbnail} alt={`${c.title} thumbnail`} />
-                    ) : c.file ? (
-                      <iframe
-                        src={`${c.file}#toolbar=0&navpanes=0&scrollbar=0`}
-                        title={`${c.title} preview`}
-                        className="pdf-thumb"
-                        loading="lazy"
-                      />
                     ) : (
-                      <div className="thumb-empty" />
+                      <div className="pdf-certificate-badge" style={{ background: `linear-gradient(135deg, ${palette.bg}, #ffffff)` }}>
+                        <div className="cert-badge-top">
+                          <Award size={26} className="cert-award-icon" style={{ color: palette.accent }} />
+                          <span className="cert-doc-type">
+                            <FileText size={12} /> OFFICIAL PDF
+                          </span>
+                        </div>
+                        <div className="cert-badge-bottom">
+                          <span className="cert-click-hint">Click to Preview</span>
+                          <ExternalLink size={13} className="cert-ext-icon" />
+                        </div>
+                      </div>
                     )}
-                  </div>
+                  </a>
 
                   <div className="cert-body">
                     <h3 className="cert-title">{c.title}</h3>
@@ -61,9 +73,13 @@ export default function Certificates({ isDetailPage = false }) {
 
                     <div className="cert-actions">
                       {c.file ? (
-                        <a href={c.file} target="_blank" rel="noopener noreferrer" className="brut-btn">View</a>
+                        <a href={c.file} target="_blank" rel="noopener noreferrer" className="brut-btn">
+                          View PDF
+                        </a>
                       ) : (
-                        <a href="/certificate.html" target="_blank" rel="noopener noreferrer" className="brut-btn">Add / Preview</a>
+                        <a href="/certificate.html" target="_blank" rel="noopener noreferrer" className="brut-btn">
+                          Preview
+                        </a>
                       )}
                     </div>
                   </div>

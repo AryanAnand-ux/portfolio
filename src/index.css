@@ -43,10 +43,8 @@ html {
 body {
   margin: 0;
   font-family: 'Outfit', sans-serif;
-  background-color: var(--bg-color);
+  background-color: transparent;
   color: var(--text-color);
-  background-image: radial-gradient(#d3d1bf 1px, transparent 1px);
-  background-size: 20px 20px;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -390,35 +388,6 @@ noscript ~ #root .reveal {
   z-index: 10001; /* Ensure it stays above the navbar (z-index 1000) */
   transition: width 0.08s linear;
   will-change: width;
-}
-
-/* ---- Smooth Cursor Styles ---- */
-.smooth-cursor-wrapper {
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-
-.smooth-cursor-wrapper.visible {
-  opacity: 1;
-}
-
-.smooth-cursor-wrapper.hidden {
-  opacity: 0;
-}
-
-/* Hide default browser cursor globally on hover-capable fine pointer devices */
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-  input,
-  textarea,
-  select,
-  input *,
-  textarea *,
-  select * {
-    cursor: text !important;
-  }
 }
 
 

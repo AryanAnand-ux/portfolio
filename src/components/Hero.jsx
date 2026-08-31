@@ -21,7 +21,7 @@ const Hero = () => (
           <aside className="profile-card reveal">
             <div className="profile-sticker" aria-hidden />
             <div className="profile-avatar-wrap">
-              <img src="/avatar.png" alt="Aryan Anand - Avatar" className="hero-avatar" width="300" height="300" fetchpriority="high" />
+              <img src="/avatar.png" alt="Aryan Anand - Avatar" className="hero-avatar" width="300" height="300" fetchPriority="high" />
             </div>
             <h3 className="profile-name">
               <GlitchText

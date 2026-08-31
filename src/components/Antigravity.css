@@ -1,0 +1,18 @@
+.antigravity-bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-color: var(--bg-color, #fffaec);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.antigravity-bg-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  pointer-events: none;
+}
